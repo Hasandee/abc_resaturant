@@ -10,7 +10,7 @@ const Menu = () => {
 
     return (
         <div className='explore-menu' id='explore-menu'>
-            <h1>Explore Our Menu</h1>
+            <h1>Menu</h1>
             <p className='explore-menu-text'>
             Discover our delicious offerings, carefully crafted to satisfy every palate. From savory appetizers to mouth-watering main courses, refreshing beverages, and delightful desserts, explore a variety of dishes that cater to every taste. </p>
 
