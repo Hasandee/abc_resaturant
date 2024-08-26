@@ -1,15 +1,22 @@
 .home-page header {
     background-image: url(../utils/img/img1.jpg);
     padding-top: 60px;
+    height: 100vh; /* Full height of the viewport */
+    margin: 0; /* Remove any default margins */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header {
     background-size: cover;
     background-position: center;
+    height: 100%; /* Ensure header covers the full height of the container */
 }
 
 header h1 {
     font-size: 5rem;
+    margin: 0; /* Ensure there's no margin causing a jump */
 }
 
 .home-page header h1,
@@ -17,7 +24,6 @@ header h1 {
     text-shadow: 2px 2px 8px #ffffff;
 }
 
-/* Targeting the custom class for the button */
 .home-page .custom-menu-btn {
     background-color: #a4861e !important; 
     border-color: #daa800 !important;
@@ -25,19 +31,22 @@ header h1 {
 }
 
 .home-page .custom-menu-btn:hover {
-    background-color: #daa800  !important; 
-    border-color: #daa800  !important;
+    background-color: #daa800 !important; 
+    border-color: #daa800 !important;
 }
 
 .menu-section {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../utils/img/img4.jpg);
     background-size: cover;
     background-position: center;
+    padding: 20px; /* Adding padding for better content spacing */
 }
 
 img {
     border-style: solid;
     border-width: 5px;
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto;
 }
 
 @media only screen and (max-width: 768px) {
@@ -51,7 +60,7 @@ img {
         font-size: 3rem;
     }
 }
-/* More specific selector targeting the button within the home-page */
+
 .home-page .custom-about-btn {
     color: #ffffff !important; 
     background-color: #a4861e !important; 
@@ -63,6 +72,3 @@ img {
     background-color: #daa800 !important; 
     border-color: #daa800 !important; 
 }
-
-
-

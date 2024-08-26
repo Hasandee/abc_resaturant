@@ -18,6 +18,7 @@
 .footer-content-left img{
     border: none !important; 
     box-shadow: none !important; 
+    width: 250px;
 }
 .footer-content-left , .footer-content-right , .footer-content-center{
     display: flex;
