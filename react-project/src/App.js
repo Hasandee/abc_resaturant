@@ -16,7 +16,7 @@ import Cart from './pages/Cart/Cart';
 import Admin from './components/Admin';
 import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
 import Footer from './components/Footer/Footer';
-import LoginPopup from './components/LoginPopup/LoginPopup'; // Assuming you have a LoginPopup component
+import LoginPopup from './components/LoginPopup/LoginPopup'; 
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -47,7 +47,7 @@ const App = () => {
                 <Button 
                   variant='outline-success' 
                   className='text-uppercase' 
-                  onClick={() => setShowLogin(true)} // Trigger the login popup
+                  onClick={() => setShowLogin(true)} 
                 >
                   Sign In
                 </Button>
