@@ -1,17 +1,22 @@
+/* Home.css */
+
+
 .home-page header {
     background-image: url(../utils/img/img1.jpg);
-    padding-top: 60px;
     height: 100vh; 
     margin: 0; 
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 60px;
+    
 }
 
 header {
     background-size: cover;
     background-position: center;
     height: 100%; 
+    z-index: 1; /* Ensure the header is behind other content */
 }
 
 header h1 {
@@ -28,6 +33,10 @@ header h1 {
     background-color: #a4861e !important; 
     border-color: #daa800 !important;
     color: #ffffff !important;
+    padding: 8px 16px;
+    width: auto;        /* Or set a specific width like 100px */
+    height: auto;       /* Or set a specific height like 40px */
+    border-radius: 5px;
 }
 
 .home-page .custom-menu-btn:hover {
@@ -71,4 +80,10 @@ img {
     color: #ffffff !important; 
     background-color: #daa800 !important; 
     border-color: #daa800 !important; 
+}
+
+/* Ensure other content is not overlapped */
+.home-page .container {
+    position: relative;
+    z-index: 2;
 }

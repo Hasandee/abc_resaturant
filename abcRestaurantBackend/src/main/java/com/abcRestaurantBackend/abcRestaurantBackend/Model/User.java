@@ -11,16 +11,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Data
 @Document(collection = "User")
-
 public class User {
     @Id
     private ObjectId id;
     private String userId;
     private String username;
     private String password;
-    private String userEmail;
-    private long phoneNumber;
-    private String profilePicture;
+    private String userEmail; // Ensure this matches the frontend
     private String userType;
-}
 
+}

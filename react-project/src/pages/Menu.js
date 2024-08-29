@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Menu.css';
 import { menu_list } from '../assets/assets';
 import FoodDisplay from '../components/FoodDisplay/FoodDisplay';
+import Footer from '../components/Footer/Footer';
 
 
 
@@ -25,7 +26,7 @@ const Menu = () => {
             <hr />
             <FoodDisplay category={category} />
            
-
+            <Footer />
         </div>
     );
 };

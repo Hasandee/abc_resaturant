@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Data
 @Document(collection = "Gallery")
-
 public class Gallery {
     @Id
     private ObjectId id;
@@ -20,4 +19,3 @@ public class Gallery {
     private String description;
     private String imageUrl;
 }
-

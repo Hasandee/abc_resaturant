@@ -48,6 +48,17 @@
     border-radius: 4px;
 }
 
+.login-popup-select {
+    outline: none;
+    border: 1px solid #c9c9c9;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: white;
+    color: #808080;
+    cursor: pointer;
+    font-size: 14px;
+}
+
 .login-popup-container button {
     border: none;
     padding: 10px;
@@ -63,7 +74,6 @@
     align-items: start;
     gap: 8px;
     margin-top: -15px;
-
 }
 
 .login-popup-condition input {

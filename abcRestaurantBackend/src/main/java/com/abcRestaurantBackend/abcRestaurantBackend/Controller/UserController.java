@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -35,14 +34,12 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    // Update an existing user by id
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") ObjectId id, @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
         return ResponseEntity.ok(updatedUser);
     }
 
-    // Delete a user by id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") ObjectId id) {
         userService.deleteUser(id);

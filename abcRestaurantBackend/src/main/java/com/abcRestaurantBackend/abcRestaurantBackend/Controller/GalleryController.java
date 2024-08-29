@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/gallery")
 public class GalleryController {
@@ -35,14 +35,12 @@ public class GalleryController {
         return new ResponseEntity<>(newGallery, HttpStatus.CREATED);
     }
 
-    // Update an existing gallery by id
     @PutMapping("/{id}")
     public ResponseEntity<Gallery> updateGallery(@PathVariable("id") ObjectId id, @RequestBody Gallery gallery) {
         Gallery updatedGallery = galleryService.updateGallery(id, gallery);
         return ResponseEntity.ok(updatedGallery);
     }
 
-    // Delete a gallery by id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGallery(@PathVariable("id") ObjectId id) {
         galleryService.deleteGallery(id);

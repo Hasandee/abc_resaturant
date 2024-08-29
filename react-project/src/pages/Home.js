@@ -7,6 +7,7 @@ import AboutImg from '../utils/img/img3.jpg';
 import { ImageGallery } from '../components/ImageGallery';
 import { ContactInfo } from '../components/ContactInfo';
 import ContactImage from '../utils/img/img11.jpg';
+import Footer from '../components/Footer/Footer';
 
 
 function Home() {
@@ -98,6 +99,7 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

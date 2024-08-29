@@ -15,7 +15,7 @@ public class GalleryService {
     @Autowired
     private GalleryRepository galleryRepository;
 
-    // Get all gallery
+    // Get all galleries
     public List<Gallery> allGallery() {
         return galleryRepository.findAll();
     }
@@ -42,7 +42,6 @@ public class GalleryService {
         if (!galleryRepository.existsById(id)) {
             throw new ResourceNotFoundException("Gallery not found with id " + id);
         }
-        // Ensure the ID in the request body matches the ID in the URL
         gallery.setId(id);
         return galleryRepository.save(gallery);
     }
