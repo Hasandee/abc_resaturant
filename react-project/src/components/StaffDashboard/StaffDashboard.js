@@ -1,12 +1,19 @@
-import React from 'react'
+import React from 'react';
+import StaffSidebar from './StaffSidebar';
+import { CContainer } from '@coreui/react';
+import '@coreui/coreui/dist/css/coreui.min.css';
+import Footer from '../Footer/Footer';
 
-const StaffDashboard = () => {
+const DashboardLayout = ({ children }) => {
   return (
-    <div className='staff'>
-        staffdashboard
-      
+    <div className="dashboard-layout">
+      <StaffSidebar />
+      <CContainer fluid className="main-content">
+        {children}
+      </CContainer>
+<Footer />
     </div>
-  )
-}
+  );
+};
 
-export default StaffDashboard
+export default DashboardLayout;

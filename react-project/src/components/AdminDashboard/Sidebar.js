@@ -17,32 +17,32 @@ const Sidebar = () => {
       <div className="sidebar-user"></div>
       <ul className="sidebar-menu">
         <li>
-          <NavLink to="/admin/dashboard" className="sidebar-link" activeClassName="active-link">
+          <NavLink to="/admindashboard" className="sidebar-link" activeClassName="active-link">
             Dashboard
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/products" className="sidebar-link" activeClassName="active-link">
+          <NavLink to="/adminproducts" className="sidebar-link" activeClassName="active-link">
             Products
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/categories" className="sidebar-link" activeClassName="active-link">
+          <NavLink to="/admincategories" className="sidebar-link" activeClassName="active-link">
             Categories
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/orders" className="sidebar-link" activeClassName="active-link">
+          <NavLink to="/adminorders" className="sidebar-link" activeClassName="active-link">
             Orders
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/users" className="sidebar-link" activeClassName="active-link">
+          <NavLink to="/adminuser" className="sidebar-link" activeClassName="active-link">
             Users
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/gallery" className="sidebar-link" activeClassName="active-link">
+          <NavLink to="/admingallery" className="sidebar-link" activeClassName="active-link">
             Gallery
           </NavLink>
         </li>
@@ -52,7 +52,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/admin/queries" className="sidebar-link" activeClassName="active-link">
+          <NavLink to="/adminqueries" className="sidebar-link" activeClassName="active-link">
             Queries
           </NavLink>
         </li>

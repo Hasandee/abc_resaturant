@@ -12,20 +12,20 @@ import img8 from "../utils/img/img8.jpg";
 
 const Gallery = () => {
   const categories = [
-    { name: "Category 1", image: img1 },
-    { name: "Category 2", image: img2 },
-    { name: "Category 3", image: img3 },
-    { name: "Category 4", image: img4 },
-    { name: "Category 5", image: img5 },
-    { name: "Category 6", image: img6 },
-    { name: "Category 7", image: img7 },
-    { name: "Category 8", image: img8 },
+    { name: "Picture 1", image: img1 },
+    { name: "Picture 2", image: img2 },
+    { name: "Picture 3", image: img3 },
+    { name: "Picture 4", image: img4 },
+    { name: "Picture 5", image: img5 },
+    { name: "Picture 6", image: img6 },
+    { name: "Picture 7", image: img7 },
+    { name: "Picture 8", image: img8 },
   ];
 
   return (
     <div className="gallery-container">
       <header className="gallery-header">
-        <h1>Simply Art, Simply Wonderful</h1>
+        <h1>Good food is the foundation of genuine happiness</h1>
         <div className="search-bar">
           <input type="text" placeholder="Search for art..." />
           <button type="submit" className="search-button">
