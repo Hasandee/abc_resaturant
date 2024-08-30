@@ -3,7 +3,6 @@ package com.abcRestaurantBackend.abcRestaurantBackend.Service;
 import com.abcRestaurantBackend.abcRestaurantBackend.Exception.ResourceNotFoundException;
 import com.abcRestaurantBackend.abcRestaurantBackend.Model.User;
 import com.abcRestaurantBackend.abcRestaurantBackend.Repository.UserRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +18,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> singleUser(ObjectId id) {
-        return userRepository.findById(id);
+    public Optional<User> singleUser(String userId) {  // Change ObjectId to String
+        return userRepository.findById(userId);
     }
 
     public User addUser(User user) {
-        user.setUserId(generateUserId());
+        if (user.getUserId() == null || user.getUserId().isEmpty()) {
+            user.setUserId(generateUserId());  // Ensure userId is set
+        }
         return userRepository.save(user);
     }
 
@@ -33,18 +34,18 @@ public class UserService {
         return String.format("U-%03d", count + 1);
     }
 
-    public User updateUser(ObjectId id, User user) {
-        if (!userRepository.existsById(id)) {
-            throw new ResourceNotFoundException("User not found with id " + id);
+    public User updateUser(String userId, User user) {  // Change ObjectId to String
+        if (!userRepository.existsById(userId)) {
+            throw new ResourceNotFoundException("User not found with userId " + userId);
         }
-        user.setId(id);
+        user.setUserId(userId);  // Set the userId before saving
         return userRepository.save(user);
     }
 
-    public void deleteUser(ObjectId id) {
-        if (!userRepository.existsById(id)) {
-            throw new ResourceNotFoundException("User not found with id " + id);
+    public void deleteUser(String userId) {  // Change ObjectId to String
+        if (!userRepository.existsById(userId)) {
+            throw new ResourceNotFoundException("User not found with userId " + userId);
         }
-        userRepository.deleteById(id);
+        userRepository.deleteById(userId);
     }
 }

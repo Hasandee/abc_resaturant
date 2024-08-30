@@ -2,7 +2,6 @@ package com.abcRestaurantBackend.abcRestaurantBackend.Controller;
 
 import com.abcRestaurantBackend.abcRestaurantBackend.Model.User;
 import com.abcRestaurantBackend.abcRestaurantBackend.Service.UserService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +22,9 @@ public class UserController {
         return new ResponseEntity<>(userService.allUser(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> getSingleUser(@PathVariable ObjectId id) {
-        return new ResponseEntity<>(userService.singleUser(id), HttpStatus.OK);
+    @GetMapping("/{userId}")
+    public ResponseEntity<Optional<User>> getSingleUser(@PathVariable String userId) {  // Change ObjectId to String
+        return new ResponseEntity<>(userService.singleUser(userId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -34,15 +33,15 @@ public class UserController {
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") ObjectId id, @RequestBody User user) {
-        User updatedUser = userService.updateUser(id, user);
+    @PutMapping("/{userId}")
+    public ResponseEntity<User> updateUser(@PathVariable("userId") String userId, @RequestBody User user) {  // Change ObjectId to String
+        User updatedUser = userService.updateUser(userId, user);
         return ResponseEntity.ok(updatedUser);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") ObjectId id) {
-        userService.deleteUser(id);
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("userId") String userId) {  // Change ObjectId to String
+        userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
 }

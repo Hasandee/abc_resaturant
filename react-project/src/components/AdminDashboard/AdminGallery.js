@@ -1,174 +1,102 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Gallery = () => {
-    const [galleryItems, setGalleryItems] = useState([]);
-    const [editItemId, setEditItemId] = useState(null);
-    const [newItemData, setNewItemData] = useState({ name: '', description: '', imageUrl: '' });
-    const [showAddForm, setShowAddForm] = useState(false);
+const AdminGallery = () => {
+  const [galleries, setGalleries] = useState([]);
+  const [gallery, setGallery] = useState({ title: '', description: '', imageUrl: '' });
+  const [editingId, setEditingId] = useState(null);
 
-    useEffect(() => {
-        fetchGalleryItems();
-    }, []);
+  useEffect(() => {
+    fetchGalleries();
+  }, []);
 
-    const fetchGalleryItems = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/gallery');
-            const data = await response.json();
-            setGalleryItems(data);
-        } catch (error) {
-            console.error('Error fetching gallery items:', error);
-        }
-    };
+  const fetchGalleries = async () => {
+    const response = await fetch('http://localhost:8080/gallery');
+    const data = await response.json();
+    setGalleries(data);
+  };
 
-    const addGalleryItem = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/gallery', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newItemData),
-            });
-            if (!response.ok) {
-                throw new Error('Failed to add item');
-            }
-            const newItem = await response.json();
-            setGalleryItems([...galleryItems, newItem]);
-            setNewItemData({ name: '', description: '', imageUrl: '' });
-            setShowAddForm(false);
-        } catch (error) {
-            console.error('Error adding gallery item:', error);
-        }
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setGallery({ ...gallery, [name]: value });
+  };
 
-    const updateGalleryItem = async (id, updatedData) => {
-        try {
-            console.log('Updating item with ID:', id); // Debugging log
-            console.log('Updated data:', updatedData); // Debugging log
+  const handleAddOrUpdate = async (e) => {
+    e.preventDefault();
+    if (editingId) {
+      // Update gallery
+      await fetch(`http://localhost:8080/gallery/${editingId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(gallery),
+      });
+    } else {
+      // Add new gallery
+      await fetch('http://localhost:8080/gallery', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(gallery),
+      });
+    }
+    setGallery({ title: '', description: '', imageUrl: '' });
+    setEditingId(null);
+    fetchGalleries();
+  };
 
-            const response = await fetch(`http://localhost:8080/gallery/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData),
-            });
-            if (!response.ok) {
-                throw new Error('Failed to update');
-            }
-            const updatedItem = await response.json();
-            console.log('Updated item response:', updatedItem); // Debugging log
+  const handleEdit = (gallery) => {
+    setGallery(gallery);
+    setEditingId(gallery.id);
+  };
 
-            setGalleryItems((prevItems) =>
-                prevItems.map((item) => (item.id === id ? updatedItem : item))
-            );
-            setEditItemId(null);
-        } catch (error) {
-            console.error('Error updating gallery item:', error);
-        }
-    };
+  const handleDelete = async (id) => {
+    await fetch(`http://localhost:8080/gallery/${id}`, {
+      method: 'DELETE',
+    });
+    fetchGalleries();
+  };
 
-    const deleteGalleryItem = async (id) => {
-        try {
-            const response = await fetch(`http://localhost:8080/gallery/${id}`, {
-                method: 'DELETE',
-            });
-            if (!response.ok) {
-                throw new Error('Failed to delete');
-            }
-            setGalleryItems((prevItems) => prevItems.filter((item) => item.id !== id));
-        } catch (error) {
-            console.error('Error deleting gallery item:', error);
-        }
-    };
+  return (
+    <div>
+      <h2>Gallery Management</h2>
+      <form onSubmit={handleAddOrUpdate}>
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          value={gallery.title}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={gallery.description}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="imageUrl"
+          placeholder="Image URL"
+          value={gallery.imageUrl}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">{editingId ? 'Update Gallery' : 'Add Gallery'}</button>
+      </form>
 
-    const handleEdit = (item) => {
-        setEditItemId(item.id);
-        setNewItemData({ name: item.name, description: item.description, imageUrl: item.imageUrl });
-        setShowAddForm(false);
-    };
-
-    const handleUpdate = () => {
-        updateGalleryItem(editItemId, newItemData);
-    };
-
-    const handleDelete = (id) => {
-        if (window.confirm('Are you sure you want to delete this item?')) {
-            deleteGalleryItem(id);
-        }
-    };
-
-    const handleAddNew = () => {
-        setShowAddForm(true);
-        setEditItemId(null);
-        setNewItemData({ name: '', description: '', imageUrl: '' });
-    };
-
-    return (
-        <div>
-            <h1>Gallery</h1>
-            <button onClick={handleAddNew}>Add New Item</button>
-            {showAddForm && (
-                <div>
-                    <h2>Add New Item</h2>
-                    <input
-                        type="text"
-                        value={newItemData.name}
-                        onChange={(e) => setNewItemData({ ...newItemData, name: e.target.value })}
-                        placeholder="Name"
-                    />
-                    <input
-                        type="text"
-                        value={newItemData.description}
-                        onChange={(e) => setNewItemData({ ...newItemData, description: e.target.value })}
-                        placeholder="Description"
-                    />
-                    <input
-                        type="text"
-                        value={newItemData.imageUrl}
-                        onChange={(e) => setNewItemData({ ...newItemData, imageUrl: e.target.value })}
-                        placeholder="Image URL"
-                    />
-                    <button onClick={addGalleryItem}>Add Item</button>
-                </div>
-            )}
-            {editItemId && (
-                <div>
-                    <h2>Edit Item</h2>
-                    <input
-                        type="text"
-                        value={newItemData.name}
-                        onChange={(e) => setNewItemData({ ...newItemData, name: e.target.value })}
-                        placeholder="Name"
-                    />
-                    <input
-                        type="text"
-                        value={newItemData.description}
-                        onChange={(e) => setNewItemData({ ...newItemData, description: e.target.value })}
-                        placeholder="Description"
-                    />
-                    <input
-                        type="text"
-                        value={newItemData.imageUrl}
-                        onChange={(e) => setNewItemData({ ...newItemData, imageUrl: e.target.value })}
-                        placeholder="Image URL"
-                    />
-                    <button onClick={handleUpdate}>Update</button>
-                </div>
-            )}
-            <ul>
-                {galleryItems.map((item) => (
-                    <li key={item.id}>
-                        <img src={item.imageUrl} alt={item.name} width="100" />
-                        <p>{item.name}</p>
-                        <p>{item.description}</p>
-                        <button onClick={() => handleEdit(item)}>Edit</button>
-                        <button onClick={() => handleDelete(item.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+      <h3>Existing Galleries</h3>
+      <ul>
+        {galleries.map((g) => (
+          <li key={g.id}>
+            <strong>{g.title}</strong> - {g.description}
+            <button onClick={() => handleEdit(g)}>Edit</button>
+            <button onClick={() => handleDelete(g.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-export default Gallery;
+export default AdminGallery;

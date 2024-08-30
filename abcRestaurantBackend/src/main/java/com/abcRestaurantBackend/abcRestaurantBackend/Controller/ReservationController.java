@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
@@ -19,30 +18,33 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
+    // Method to get all reservations
     @GetMapping
     public ResponseEntity<List<Reservation>> getAllReservations() {
         return new ResponseEntity<>(reservationService.allReservation(), HttpStatus.OK);
     }
 
+    // Method to get a single reservation by id
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Reservation>> getSingleReservation(@PathVariable ObjectId id) {
         return new ResponseEntity<>(reservationService.singleReservation(id), HttpStatus.OK);
     }
 
+    // Method to add a new reservation
     @PostMapping
     public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) {
         Reservation newReservation = reservationService.addReservation(reservation);
         return new ResponseEntity<>(newReservation, HttpStatus.CREATED);
     }
 
-    // Update an existing reservation by id
+    // Method to update an existing reservation by id
     @PutMapping("/{id}")
     public ResponseEntity<Reservation> updateReservation(@PathVariable("id") ObjectId id, @RequestBody Reservation reservation) {
         Reservation updatedReservation = reservationService.updateReservation(id, reservation);
         return ResponseEntity.ok(updatedReservation);
     }
 
-    // Delete a reservation by id
+    // Method to delete a reservation by id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReservation(@PathVariable("id") ObjectId id) {
         reservationService.deleteReservation(id);

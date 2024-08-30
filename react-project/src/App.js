@@ -15,6 +15,9 @@ import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import AdminGallery from './components/AdminDashboard/AdminGallery';
 import StaffDashboard from './components/StaffDashboard/StaffDashboard';
 import AppNavbar from './components/Navbar/Navbar';
+import AdminReservations from './components/AdminDashboard/AdminReservations';
+import AdminUsers from './components/AdminDashboard/AdminUsers';
+
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -36,7 +39,12 @@ const App = () => {
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/admingallery" element={<AdminGallery />} />
           <Route path="/staffdashboard" element={<StaffDashboard />} />
+          <Route path="/adminreservation" element={<AdminReservations />} />
+          <Route path="/adminuser" element={<AdminUsers />} />
+          
+        
         </Routes>
+
       </div>
     </>
   );

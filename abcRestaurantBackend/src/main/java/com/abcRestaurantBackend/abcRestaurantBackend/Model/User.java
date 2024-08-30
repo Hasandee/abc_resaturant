@@ -3,7 +3,6 @@ package com.abcRestaurantBackend.abcRestaurantBackend.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,11 +12,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "User")
 public class User {
     @Id
-    private ObjectId id;
-    private String userId;
+    private String userId;  // Change this from ObjectId to String and make it the primary key
     private String username;
     private String password;
-    private String userEmail; // Ensure this matches the frontend
+    private String userEmail;
     private String userType;
-
 }
