@@ -8,7 +8,9 @@ const ReservationForm = () => {
         time: '',
         numberOfPeople: '',
         specialRequests: '',
-        branch: '', // New field for Branch
+        branch: '', // Field for Branch
+        phone: '', // New field for Phone Number
+        email: ''  // New field for Email
     });
 
     const branches = ['Downtown', 'Uptown', 'Midtown', 'Suburbs']; // Example branches
@@ -61,7 +63,7 @@ const ReservationForm = () => {
                 />
             </div>
             <div>
-                <label>Branch:</label> {/* New Branch field */}
+                <label>Branch:</label> {/* Branch field */}
                 <select 
                     name="branch" 
                     value={formData.branch} 
@@ -75,6 +77,26 @@ const ReservationForm = () => {
                         </option>
                     ))}
                 </select>
+            </div>
+            <div>
+                <label>Phone Number:</label> {/* New Phone Number field */}
+                <input 
+                    type="tel" 
+                    name="phone" 
+                    value={formData.phone} 
+                    onChange={handleChange} 
+                    required 
+                />
+            </div>
+            <div>
+                <label>Email:</label> {/* New Email field */}
+                <input 
+                    type="email" 
+                    name="email" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                    required 
+                />
             </div>
             <div>
                 <label>Special Requests:</label>

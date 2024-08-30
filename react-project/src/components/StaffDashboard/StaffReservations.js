@@ -1,4 +1,3 @@
-// src/components/AdminReservations.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StaffReservation.css';
@@ -13,7 +12,9 @@ const StaffReservations = () => {
         numberOfPeople: '',
         specialRequests: '',
         status: '',
-        branch: ''  // Added branch field
+        branch: '',
+        phone: '', // New field
+        email: ''  // New field
     });
     const [editReservation, setEditReservation] = useState(null);
 
@@ -48,7 +49,9 @@ const StaffReservations = () => {
                     numberOfPeople: '',
                     specialRequests: '',
                     status: '',
-                    branch: ''  // Reset branch field
+                    branch: '',
+                    phone: '', // Reset phone field
+                    email: ''  // Reset email field
                 });
             })
             .catch(error => {
@@ -105,7 +108,7 @@ const StaffReservations = () => {
                     onChange={handleInputChange}
                 />
                 <input
-                    type="text"
+                    type="datetime-local"
                     name="reservationDate"
                     placeholder="Date"
                     value={newReservation.reservationDate}
@@ -146,6 +149,20 @@ const StaffReservations = () => {
                     value={newReservation.branch}
                     onChange={handleInputChange}
                 />
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone Number"
+                    value={newReservation.phone}
+                    onChange={handleInputChange}
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={newReservation.email}
+                    onChange={handleInputChange}
+                />
                 <button onClick={handleAddReservation}>Add Reservation</button>
             </div>
 
@@ -167,7 +184,7 @@ const StaffReservations = () => {
                         onChange={(e) => setEditReservation({ ...editReservation, userId: e.target.value })}
                     />
                     <input
-                        type="text"
+                        type="datetime-local"
                         name="reservationDate"
                         value={editReservation.reservationDate}
                         onChange={(e) => setEditReservation({ ...editReservation, reservationDate: e.target.value })}
@@ -202,43 +219,35 @@ const StaffReservations = () => {
                         value={editReservation.branch}
                         onChange={(e) => setEditReservation({ ...editReservation, branch: e.target.value })}
                     />
+                    <input
+                        type="tel"
+                        name="phone"
+                        value={editReservation.phone}
+                        onChange={(e) => setEditReservation({ ...editReservation, phone: e.target.value })}
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        value={editReservation.email}
+                        onChange={(e) => setEditReservation({ ...editReservation, email: e.target.value })}
+                    />
                     <button onClick={handleUpdateReservation}>Update Reservation</button>
                 </div>
             )}
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Reservation ID</th>
-                        <th>User ID</th>
-                        <th>Date</th>
-                        <th>Type</th>
-                        <th>Number of People</th>
-                        <th>Special Requests</th>
-                        <th>Status</th>
-                        <th>Branch</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {reservations.map((reservation) => (
-                        <tr key={reservation.reservationId}>
-                            <td>{reservation.reservationId}</td>
-                            <td>{reservation.userId}</td>
-                            <td>{reservation.reservationDate}</td>
-                            <td>{reservation.reservationType}</td>
-                            <td>{reservation.numberOfPeople}</td>
-                            <td>{reservation.specialRequests}</td>
-                            <td>{reservation.status}</td>
-                            <td>{reservation.branch}</td>
-                            <td>
-                                <button onClick={() => handleEditReservation(reservation)}>Edit</button>
-                                <button onClick={() => handleDeleteReservation(reservation.reservationId)}>Delete</button>
-                            </td>
-                        </tr>
+            {/* Reservations List */}
+            <div className="reservations-list">
+                <h3>Reservations List</h3>
+                <ul>
+                    {reservations.map(reservation => (
+                        <li key={reservation.reservationId}>
+                            {reservation.reservationId} - {reservation.userId} - {reservation.reservationDate} - {reservation.numberOfPeople} - {reservation.branch} - {reservation.phone} - {reservation.email}
+                            <button onClick={() => handleEditReservation(reservation)}>Edit</button>
+                            <button onClick={() => handleDeleteReservation(reservation.reservationId)}>Delete</button>
+                        </li>
                     ))}
-                </tbody>
-            </table>
+                </ul>
+            </div>
         </div>
     );
 };

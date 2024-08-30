@@ -12,13 +12,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Reservation")
 public class Reservation {
     @Id
-    private String id;  // Change to String for reservationId
+    private String id;
     private String reservationId;
     private String userId;
     private String reservationDate;
     private String reservationType;
     private int numberOfPeople;
     private String specialRequests;
-    private String Branch;
+    private String branch;
     private String status;
+    private String phone; // New field
+    private String email; // New field
 }
