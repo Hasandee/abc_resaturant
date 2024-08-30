@@ -1,8 +1,13 @@
 package com.abcRestaurantBackend.abcRestaurantBackend.Repository;
 
 import com.abcRestaurantBackend.abcRestaurantBackend.Model.Gallery;
-import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface GalleryRepository extends MongoRepository<Gallery, ObjectId> {
+import java.util.Optional;
+
+
+@Repository
+public interface GalleryRepository extends MongoRepository<Gallery, String> {
+    Optional<Gallery> findByName(String name);
 }

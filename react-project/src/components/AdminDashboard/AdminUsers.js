@@ -4,6 +4,8 @@ import './AdminUsers.css';
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState(null);
   const [newUser, setNewUser] = useState({
     username: '',
     userEmail: '',
@@ -67,12 +69,47 @@ const AdminUsers = () => {
     }
   };
 
+  const handleEditUser = async () => {
+    try {
+      const response = await fetch(`/user/${currentUserId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        setUsers(users.map(user => (user.userId === currentUserId ? updatedUser : user)));
+        setShowEditForm(false);
+        setCurrentUserId(null);
+        setNewUser({ username: '', userEmail: '', userType: '' });
+      } else {
+        console.error('Failed to edit user');
+      }
+    } catch (error) {
+      console.error('Error editing user:', error);
+    }
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewUser({
       ...newUser,
       [name]: value,
     });
+  };
+
+  const handleEditButtonClick = (user) => {
+    setCurrentUserId(user.userId);
+    setNewUser({
+      username: user.username,
+      userEmail: user.userEmail,
+      userType: user.userType,
+    });
+    setShowEditForm(true);
+    setShowAddForm(false);
   };
 
   return (
@@ -109,6 +146,34 @@ const AdminUsers = () => {
         </div>
       )}
 
+      {showEditForm && (
+        <div className='edit-user-form'>
+          <h3>Edit User</h3>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={newUser.username}
+            onChange={handleInputChange}
+          />
+          <input
+            type="email"
+            name="userEmail"
+            placeholder="Email"
+            value={newUser.userEmail}
+            onChange={handleInputChange}
+          />
+          <input
+            type="text"
+            name="userType"
+            placeholder="User Type"
+            value={newUser.userType}
+            onChange={handleInputChange}
+          />
+          <button className="submit-button" onClick={handleEditUser}>Save Changes</button>
+        </div>
+      )}
+
       <h2>Manage Users</h2>
       <table>
         <thead>
@@ -128,6 +193,7 @@ const AdminUsers = () => {
               <td>{user.userEmail}</td>
               <td>{user.userType}</td>
               <td>
+                <button onClick={() => handleEditButtonClick(user)}>Edit</button>
                 <button onClick={() => handleDelete(user.userId)}>Delete</button>
               </td>
             </tr>

@@ -1,7 +1,6 @@
-// src/App.js
 import React, { useState } from 'react';
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom'; // Ensure useLocation is imported
 import Home from './pages/Home'; 
 import Menu from './pages/Menu';
 import Gallery from './pages/Gallery';
@@ -14,19 +13,28 @@ import LoginPopup from './components/LoginPopup/LoginPopup';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import AdminGallery from './components/AdminDashboard/AdminGallery';
 import StaffDashboard from './components/StaffDashboard/StaffDashboard';
-import AppNavbar from './components/Navbar/Navbar';
+import HomeNavbar from './components/Navbar/HomeNavbar'; // Ensure correct import of HomeNavbar
 import AdminReservations from './components/AdminDashboard/AdminReservations';
 import AdminUsers from './components/AdminDashboard/AdminUsers';
-
+import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard'; // Ensure correct import of CustomerDashboard
+import CustomerNavbar from './components/Navbar/CustomerNavbar'; // Ensure correct import of CustomerNavbar
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
+  const location = useLocation(); // Ensure useLocation is called correctly
+
+  const isCustomerDashboard = location.pathname === '/customerdashboard';
 
   return (
     <>
-      {showLogin ? <LoginPopup setShowLogin={setShowLogin}/>:<></>}
+      {showLogin ? <LoginPopup setShowLogin={setShowLogin}/> : null}
       <div className='app'>
-        <AppNavbar setShowLogin={setShowLogin} />  {/* Use Navbar */}
+        {/* Render HomeNavbar only if it's not the customer dashboard */}
+        {!isCustomerDashboard && <HomeNavbar setShowLogin={setShowLogin} />}  
+        
+        {/* Render CustomerNavbar only on the customer dashboard */}
+        {isCustomerDashboard && <CustomerNavbar />}  
+        
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/menu' element={<Menu />} /> 
@@ -39,12 +47,10 @@ const App = () => {
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/admingallery" element={<AdminGallery />} />
           <Route path="/staffdashboard" element={<StaffDashboard />} />
+          <Route path="/customerdashboard" element={<CustomerDashboard />} />
           <Route path="/adminreservation" element={<AdminReservations />} />
           <Route path="/adminuser" element={<AdminUsers />} />
-          
-        
         </Routes>
-
       </div>
     </>
   );
