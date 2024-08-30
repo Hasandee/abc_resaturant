@@ -18,6 +18,7 @@ import AdminReservations from './components/AdminDashboard/AdminReservations';
 import AdminUsers from './components/AdminDashboard/AdminUsers';
 import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard'; // Ensure correct import of CustomerDashboard
 import CustomerNavbar from './components/Navbar/CustomerNavbar'; // Ensure correct import of CustomerNavbar
+import StaffReservations from './components/StaffDashboard/StaffReservations';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/customerdashboard" element={<CustomerDashboard />} />
           <Route path="/adminreservation" element={<AdminReservations />} />
           <Route path="/adminuser" element={<AdminUsers />} />
+          <Route path="/staffreservation" element={<StaffReservations />} />
         </Routes>
       </div>
     </>

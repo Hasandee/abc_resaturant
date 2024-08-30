@@ -1,0 +1,128 @@
+/* Overall container styling */
+.admin-reservations {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-top: 100px;
+    background-color: #e7d390;
+}
+
+/* Main heading */
+.admin-reservations h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+/* Form container */
+.reservation-form {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Form heading */
+.reservation-form h3 {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1.5rem;
+}
+
+/* Form input styling */
+.reservation-form input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+/* Button styling */
+.reservation-form button {
+    padding: 8px 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #a4861e;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reservation-form button:hover {
+    background-color: #daa800;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #bfa54d;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table button {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+table button.edit-button {
+    background-color: #28a745;
+    color: #fff;
+}
+
+table button.edit-button:hover {
+    background-color: #218838;
+}
+
+table button.delete-button {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+table button.delete-button:hover {
+    background-color: #c82333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .reservation-form input, .reservation-form button {
+        font-size: 0.8rem;
+    }
+
+    table th, table td {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+}
