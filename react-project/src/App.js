@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Routes, Route, useLocation } from 'react-router-dom'; // Ensure useLocation is imported
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home'; 
 import Menu from './pages/Menu';
 import Gallery from './pages/Gallery';
@@ -13,25 +13,35 @@ import LoginPopup from './components/LoginPopup/LoginPopup';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
 import AdminGallery from './components/AdminDashboard/AdminGallery';
 import StaffDashboard from './components/StaffDashboard/StaffDashboard';
-import HomeNavbar from './components/Navbar/HomeNavbar'; // Ensure correct import of HomeNavbar
+import HomeNavbar from './components/Navbar/HomeNavbar';
 import AdminReservations from './components/AdminDashboard/AdminReservations';
 import AdminUsers from './components/AdminDashboard/AdminUsers';
-import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard'; // Ensure correct import of CustomerDashboard
-import CustomerNavbar from './components/Navbar/CustomerNavbar'; // Ensure correct import of CustomerNavbar
+import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
+import CustomerNavbar from './components/Navbar/CustomerNavbar';
 import StaffReservations from './components/StaffDashboard/StaffReservations';
+import Feedback from './components/Feedback/Feedback';
+import AdminFeedback from './components/AdminDashboard/AdminFeedback';
+import GuestMenu from './pages/GuestMenu';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const location = useLocation(); // Ensure useLocation is called correctly
+  const location = useLocation();
+
+  // Check if the current path is an admin-related route
+  const isAdminRoute = location.pathname.startsWith('/admindashboard') || 
+                       location.pathname.startsWith('/admingallery') ||
+                       location.pathname.startsWith('/adminreservation') ||
+                       location.pathname.startsWith('/adminuser') ||
+                       location.pathname.startsWith('/adminfeedback');
 
   const isCustomerDashboard = location.pathname === '/customerdashboard';
-
+  
   return (
     <>
       {showLogin ? <LoginPopup setShowLogin={setShowLogin}/> : null}
       <div className='app'>
-        {/* Render HomeNavbar only if it's not the customer dashboard */}
-        {!isCustomerDashboard && <HomeNavbar setShowLogin={setShowLogin} />}  
+        {/* Render HomeNavbar only if it's not an admin route */}
+        {!isAdminRoute && !isCustomerDashboard && <HomeNavbar setShowLogin={setShowLogin} />}  
         
         {/* Render CustomerNavbar only on the customer dashboard */}
         {isCustomerDashboard && <CustomerNavbar />}  
@@ -52,6 +62,9 @@ const App = () => {
           <Route path="/adminreservation" element={<AdminReservations />} />
           <Route path="/adminuser" element={<AdminUsers />} />
           <Route path="/staffreservation" element={<StaffReservations />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/adminfeedback" element={<AdminFeedback />} />
+          <Route path="/guestmenu" element={<GuestMenu />} />
         </Routes>
       </div>
     </>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000") // Adjust to your frontend URL
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
@@ -30,8 +31,13 @@ public class ReservationController {
 
     @PostMapping
     public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) {
-        Reservation newReservation = reservationService.addReservation(reservation);
-        return new ResponseEntity<>(newReservation, HttpStatus.CREATED);
+        try {
+            Reservation newReservation = reservationService.addReservation(reservation);
+            return new ResponseEntity<>(newReservation, HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.err.println("Failed to add reservation: " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("/{reservationId}")

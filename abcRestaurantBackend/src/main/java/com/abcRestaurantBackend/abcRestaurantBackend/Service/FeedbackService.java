@@ -3,7 +3,6 @@ package com.abcRestaurantBackend.abcRestaurantBackend.Service;
 import com.abcRestaurantBackend.abcRestaurantBackend.Exception.ResourceNotFoundException;
 import com.abcRestaurantBackend.abcRestaurantBackend.Model.Feedback;
 import com.abcRestaurantBackend.abcRestaurantBackend.Repository.FeedbackRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +19,9 @@ public class FeedbackService {
         return feedbackRepository.findAll();
     }
 
-    // Get a single feedback by id
-    public Optional<Feedback> singleFeedback(ObjectId id) {
-        return feedbackRepository.findById(id);
+    // Get a single feedback by feedbackId
+    public Optional<Feedback> singleFeedback(String feedbackId) {
+        return feedbackRepository.findByFeedbackId(feedbackId);
     }
 
     // Add a new feedback
@@ -34,24 +33,24 @@ public class FeedbackService {
     // Generate a new feedback ID
     private String generateFeedbackId() {
         long count = feedbackRepository.count();
-        return String.format("E-%03d", count + 1);
+        return String.format("F-%03d", count + 1);
     }
 
-    // Update an existing feedback by id
-    public Feedback updateFeedback(ObjectId id, Feedback feedback) {
-        if (!feedbackRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Feedback not found with id " + id);
+    // Update an existing feedback by feedbackId
+    public Feedback updateFeedback(String feedbackId, Feedback feedback) {
+        if (!feedbackRepository.existsByFeedbackId(feedbackId)) {
+            throw new ResourceNotFoundException("Feedback not found with id " + feedbackId);
         }
-        // Ensure the ID in the request body matches the ID in the URL
-        feedback.setId(id);
+        // Ensure the feedbackId in the request body matches the feedbackId in the URL
+        feedback.setFeedbackId(feedbackId);
         return feedbackRepository.save(feedback);
     }
 
-    // Delete a feedback by id
-    public void deleteFeedback(ObjectId id) {
-        if (!feedbackRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Feedback not found with id " + id);
+    // Delete a feedback by feedbackId
+    public void deleteFeedback(String feedbackId) {
+        if (!feedbackRepository.existsByFeedbackId(feedbackId)) {
+            throw new ResourceNotFoundException("Feedback not found with id " + feedbackId);
         }
-        feedbackRepository.deleteById(id);
+        feedbackRepository.deleteByFeedbackId(feedbackId);
     }
 }

@@ -43,12 +43,13 @@
   border-color: #a4861e;
   color: #a4861e; 
   font-weight: bold; 
-  padding: 5px 20px; 
+  padding: 10px 20px; 
   border-radius: 30px; 
   transition: all 0.3s ease; 
   white-space: nowrap;
   font-size: 0.9rem; 
   margin-left: 50px; 
+  background-color: transparent;
 }
 
 .navbar .btn-outline-success:hover {
@@ -60,6 +61,6 @@
 
 .cart-icon .fa-shopping-cart {
   font-size: 2rem; 
-  color: #daa800; 
+  color: black; 
   margin-left: 50px; 
 }

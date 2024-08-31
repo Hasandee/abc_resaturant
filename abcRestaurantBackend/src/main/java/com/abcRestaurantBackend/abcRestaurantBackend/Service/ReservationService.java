@@ -23,8 +23,13 @@ public class ReservationService {
     }
 
     public Reservation addReservation(Reservation reservation) {
-        reservation.setReservationId(generateReservationId());
-        return reservationRepository.save(reservation);
+        try {
+            reservation.setReservationId(generateReservationId());
+            return reservationRepository.save(reservation);
+        } catch (Exception e) {
+            System.err.println("Error saving reservation: " + e.getMessage());
+            throw new RuntimeException("Failed to save reservation");
+        }
     }
 
     private String generateReservationId() {
