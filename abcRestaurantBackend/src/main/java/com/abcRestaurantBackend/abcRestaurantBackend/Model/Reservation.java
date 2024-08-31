@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-// src/main/java/com/abcRestaurantBackend/abcRestaurantBackend/Model/Reservation.java
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -25,5 +23,4 @@ public class Reservation {
     private String status;
     private String phone; // New field
     private String email; // New field
-    private boolean emailConfirmed; // New field
 }
