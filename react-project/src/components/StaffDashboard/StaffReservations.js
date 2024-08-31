@@ -5,7 +5,6 @@ import './StaffReservation.css';
 const StaffReservations = () => {
     const [reservations, setReservations] = useState([]);
     const [newReservation, setNewReservation] = useState({
-        reservationId: '',
         userId: '',
         reservationDate: '',
         reservationType: '',
@@ -13,8 +12,8 @@ const StaffReservations = () => {
         specialRequests: '',
         status: '',
         branch: '',
-        phone: '', // New field
-        email: ''  // New field
+        phone: '',
+        email: ''
     });
     const [editReservation, setEditReservation] = useState(null);
 
@@ -42,7 +41,6 @@ const StaffReservations = () => {
             .then(() => {
                 fetchReservations();
                 setNewReservation({
-                    reservationId: '',
                     userId: '',
                     reservationDate: '',
                     reservationType: '',
@@ -50,8 +48,8 @@ const StaffReservations = () => {
                     specialRequests: '',
                     status: '',
                     branch: '',
-                    phone: '', // Reset phone field
-                    email: ''  // Reset email field
+                    phone: '',
+                    email: ''
                 });
             })
             .catch(error => {
@@ -86,20 +84,20 @@ const StaffReservations = () => {
         }
     };
 
-    return (
-        <div className="admin-reservations">
-            <h2>All Reservations</h2>
+    const handleConfirmReservation = (reservationId) => {
+        axios.put(`/reservation/confirm/${reservationId}`)
+            .then(() => {
+                fetchReservations();
+            })
+            .catch(error => {
+                console.error("There was an error confirming the reservation!", error);
+            });
+    };
 
-            {/* Add Reservation Form */}
+    return (
+        <div className="staff-reservations">
             <div className="reservation-form">
                 <h3>Add New Reservation</h3>
-                <input
-                    type="text"
-                    name="reservationId"
-                    placeholder="Reservation ID"
-                    value={newReservation.reservationId}
-                    onChange={handleInputChange}
-                />
                 <input
                     type="text"
                     name="userId"
@@ -108,16 +106,15 @@ const StaffReservations = () => {
                     onChange={handleInputChange}
                 />
                 <input
-                    type="datetime-local"
+                    type="date"
                     name="reservationDate"
-                    placeholder="Date"
                     value={newReservation.reservationDate}
                     onChange={handleInputChange}
                 />
                 <input
                     type="text"
                     name="reservationType"
-                    placeholder="Type"
+                    placeholder="Reservation Type"
                     value={newReservation.reservationType}
                     onChange={handleInputChange}
                 />
@@ -128,18 +125,10 @@ const StaffReservations = () => {
                     value={newReservation.numberOfPeople}
                     onChange={handleInputChange}
                 />
-                <input
-                    type="text"
+                <textarea
                     name="specialRequests"
                     placeholder="Special Requests"
                     value={newReservation.specialRequests}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    name="status"
-                    placeholder="Status"
-                    value={newReservation.status}
                     onChange={handleInputChange}
                 />
                 <input
@@ -150,9 +139,9 @@ const StaffReservations = () => {
                     onChange={handleInputChange}
                 />
                 <input
-                    type="tel"
+                    type="text"
                     name="phone"
-                    placeholder="Phone Number"
+                    placeholder="Phone"
                     value={newReservation.phone}
                     onChange={handleInputChange}
                 />
@@ -166,87 +155,117 @@ const StaffReservations = () => {
                 <button onClick={handleAddReservation}>Add Reservation</button>
             </div>
 
-            {/* Edit Reservation Form */}
             {editReservation && (
                 <div className="reservation-form">
                     <h3>Edit Reservation</h3>
                     <input
                         type="text"
                         name="reservationId"
+                        placeholder="Reservation ID"
                         value={editReservation.reservationId}
-                        onChange={(e) => setEditReservation({ ...editReservation, reservationId: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, reservationId: e.target.value })}
                         disabled
                     />
                     <input
                         type="text"
                         name="userId"
+                        placeholder="User ID"
                         value={editReservation.userId}
-                        onChange={(e) => setEditReservation({ ...editReservation, userId: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, userId: e.target.value })}
                     />
                     <input
-                        type="datetime-local"
+                        type="date"
                         name="reservationDate"
                         value={editReservation.reservationDate}
-                        onChange={(e) => setEditReservation({ ...editReservation, reservationDate: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, reservationDate: e.target.value })}
                     />
                     <input
                         type="text"
                         name="reservationType"
+                        placeholder="Reservation Type"
                         value={editReservation.reservationType}
-                        onChange={(e) => setEditReservation({ ...editReservation, reservationType: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, reservationType: e.target.value })}
                     />
                     <input
                         type="number"
                         name="numberOfPeople"
+                        placeholder="Number of People"
                         value={editReservation.numberOfPeople}
-                        onChange={(e) => setEditReservation({ ...editReservation, numberOfPeople: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, numberOfPeople: e.target.value })}
                     />
-                    <input
-                        type="text"
+                    <textarea
                         name="specialRequests"
+                        placeholder="Special Requests"
                         value={editReservation.specialRequests}
-                        onChange={(e) => setEditReservation({ ...editReservation, specialRequests: e.target.value })}
-                    />
-                    <input
-                        type="text"
-                        name="status"
-                        value={editReservation.status}
-                        onChange={(e) => setEditReservation({ ...editReservation, status: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, specialRequests: e.target.value })}
                     />
                     <input
                         type="text"
                         name="branch"
+                        placeholder="Branch"
                         value={editReservation.branch}
-                        onChange={(e) => setEditReservation({ ...editReservation, branch: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, branch: e.target.value })}
                     />
                     <input
-                        type="tel"
+                        type="text"
                         name="phone"
+                        placeholder="Phone"
                         value={editReservation.phone}
-                        onChange={(e) => setEditReservation({ ...editReservation, phone: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, phone: e.target.value })}
                     />
                     <input
                         type="email"
                         name="email"
+                        placeholder="Email"
                         value={editReservation.email}
-                        onChange={(e) => setEditReservation({ ...editReservation, email: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, email: e.target.value })}
                     />
                     <button onClick={handleUpdateReservation}>Update Reservation</button>
                 </div>
             )}
 
-            {/* Reservations List */}
-            <div className="reservations-list">
-                <h3>Reservations List</h3>
-                <ul>
-                    {reservations.map(reservation => (
-                        <li key={reservation.reservationId}>
-                            {reservation.reservationId} - {reservation.userId} - {reservation.reservationDate} - {reservation.numberOfPeople} - {reservation.branch} - {reservation.phone} - {reservation.email}
-                            <button onClick={() => handleEditReservation(reservation)}>Edit</button>
-                            <button onClick={() => handleDeleteReservation(reservation.reservationId)}>Delete</button>
-                        </li>
-                    ))}
-                </ul>
+            <div className="reservation-list">
+                <h3>Reservations</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Reservation ID</th>
+                            <th>User ID</th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>People</th>
+                            <th>Special Requests</th>
+                            <th>Status</th>
+                            <th>Branch</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {reservations.map(reservation => (
+                            <tr key={reservation.reservationId}>
+                                <td>{reservation.reservationId}</td>
+                                <td>{reservation.userId}</td>
+                                <td>{reservation.reservationDate}</td>
+                                <td>{reservation.reservationType}</td>
+                                <td>{reservation.numberOfPeople}</td>
+                                <td>{reservation.specialRequests}</td>
+                                <td>{reservation.status}</td>
+                                <td>{reservation.branch}</td>
+                                <td>{reservation.phone}</td>
+                                <td>{reservation.email}</td>
+                                <td>
+                                    <button onClick={() => handleEditReservation(reservation)}>Edit</button>
+                                    <button onClick={() => handleDeleteReservation(reservation.reservationId)}>Delete</button>
+                                    {reservation.status !== 'Confirmed' && (
+                                        <button onClick={() => handleConfirmReservation(reservation.reservationId)}>Confirm</button>
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );

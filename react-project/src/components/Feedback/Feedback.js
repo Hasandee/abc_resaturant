@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import CustomerNavbar from '../Navbar/CustomerNavbar';
+import './Feedback.css';
 
 const FeedbackForm = () => {
     const [feedback, setFeedback] = useState({
@@ -31,6 +33,9 @@ const FeedbackForm = () => {
     };
 
     return (
+        <div className='feedback'>
+             <CustomerNavbar /> 
+        
         <form onSubmit={handleSubmit} className="feedback-form">
             <h2>Submit Your Feedback</h2>
 
@@ -76,6 +81,7 @@ const FeedbackForm = () => {
 
             <button type="submit">Submit Feedback</button>
         </form>
+        </div>
     );
 };
 

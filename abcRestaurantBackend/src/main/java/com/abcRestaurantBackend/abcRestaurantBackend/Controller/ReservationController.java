@@ -25,19 +25,13 @@ public class ReservationController {
     @GetMapping("/{reservationId}")
     public ResponseEntity<Reservation> getSingleReservation(@PathVariable String reservationId) {
         Reservation reservation = reservationService.singleReservation(reservationId);
-        return reservation != null ? new ResponseEntity<>(reservation, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(reservation, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Reservation> addReservation(@RequestBody Reservation reservation) {
-        try {
-            Reservation newReservation = reservationService.addReservation(reservation);
-            return new ResponseEntity<>(newReservation, HttpStatus.CREATED);
-        } catch (Exception e) {
-            System.err.println("Failed to add reservation: " + e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Reservation newReservation = reservationService.addReservation(reservation);
+        return new ResponseEntity<>(newReservation, HttpStatus.CREATED);
     }
 
     @PutMapping("/{reservationId}")
@@ -50,5 +44,11 @@ public class ReservationController {
     public ResponseEntity<Void> deleteReservation(@PathVariable String reservationId) {
         reservationService.deleteReservation(reservationId);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/confirm/{reservationId}")
+    public ResponseEntity<Reservation> confirmReservation(@PathVariable String reservationId) {
+        Reservation confirmedReservation = reservationService.confirmReservation(reservationId);
+        return new ResponseEntity<>(confirmedReservation, HttpStatus.OK);
     }
 }

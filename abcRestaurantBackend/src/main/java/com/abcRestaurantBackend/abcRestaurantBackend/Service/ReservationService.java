@@ -14,22 +14,21 @@ public class ReservationService {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     public List<Reservation> allReservation() {
         return reservationRepository.findAll();
     }
 
     public Reservation singleReservation(String reservationId) {
-        return reservationRepository.findByReservationId(reservationId);
+        return reservationRepository.findByReservationId(reservationId)
+                .orElseThrow(() -> new ResourceNotFoundException("Reservation not found with id " + reservationId));
     }
 
     public Reservation addReservation(Reservation reservation) {
-        try {
-            reservation.setReservationId(generateReservationId());
-            return reservationRepository.save(reservation);
-        } catch (Exception e) {
-            System.err.println("Error saving reservation: " + e.getMessage());
-            throw new RuntimeException("Failed to save reservation");
-        }
+        reservation.setReservationId(generateReservationId());
+        return reservationRepository.save(reservation);
     }
 
     private String generateReservationId() {
@@ -46,10 +45,23 @@ public class ReservationService {
     }
 
     public void deleteReservation(String reservationId) {
-        Reservation reservation = reservationRepository.findByReservationId(reservationId);
-        if (reservation == null) {
-            throw new ResourceNotFoundException("Reservation not found with id " + reservationId);
-        }
+        Reservation reservation = singleReservation(reservationId);
         reservationRepository.delete(reservation);
+    }
+
+    public Reservation confirmReservation(String reservationId) {
+        Reservation reservation = singleReservation(reservationId);
+        reservation.setStatus("Confirmed");
+        reservation.setEmailConfirmed(true);
+        Reservation updatedReservation = reservationRepository.save(reservation);
+
+        // Send confirmation email
+        emailService.sendSimpleEmail(
+                reservation.getEmail(),
+                "Reservation Confirmation",
+                "Your reservation with ID " + reservationId + " has been confirmed."
+        );
+
+        return updatedReservation;
     }
 }
