@@ -1,4 +1,8 @@
+.about-page{
+    padding-top: 40px;
+}
+
 .about-page header {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../utils/img/about-page-img.jpg);
-    height: 50vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../utils/img/img12.jpg);
+    height: 80vh;
 }
