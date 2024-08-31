@@ -23,19 +23,21 @@ const HomeNavbar = ({ showNavbar = true, setShowLogin }) => {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto justify-content-end w-100'>
             <Link to="/" className='nav-link active text-uppercase'>Home</Link>
-            <Link to="/menu" className='nav-link text-uppercase'>Menu</Link>
+            <Link to="/guestmenu" className='nav-link text-uppercase'>Menu</Link>
             <Link to="/gallery" className='nav-link text-uppercase'>Gallery</Link>
             <Link to="/about" className='nav-link text-uppercase'>About</Link>
             <Link to="/contact" className='nav-link text-uppercase'>Contact</Link>
           </Nav>
           <Nav>
-            <Button 
-              variant='outline-success' 
-              className='text-uppercase' 
-              onClick={() => setShowLogin(true)} 
-            >
-              Sign In
-            </Button>
+          <Button 
+  variant='outline-success' 
+  className='text-uppercase' 
+  onClick={() => setShowLogin(true)} 
+>
+  Sign In
+</Button>
+
+
            
           </Nav>
         </Navbar.Collapse>

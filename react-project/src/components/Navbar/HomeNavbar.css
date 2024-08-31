@@ -37,16 +37,19 @@
     background-image: url('data:image/svg+xml,...'); /* Bootstrap’s default icon */
   }
   
-  .button-outline-success {
-    border-color: #ffc400; /* Green border for the button */
-    color: #ffc400; /* Green text color */
-    font-size: 1.125rem; /* Increase font size */
-    padding: 0.75rem 1.5rem; /* Increase padding for a larger button */
-  }
-  
-  .button-outline-success:hover {
-    background-color: #ffc400; /* Green background on hover */
-    color: #ffffff; /* White text color on hover */
-  }
+  /* Override Bootstrap's outline-success button */
+.btn-outline-success {
+  color: #ffc400; /* Text color */
+  border-color: #ffc400; /* Border color */
+  padding: 0.75rem 1.5rem; /* Increase padding for a larger button */
+  font-size: 1.125rem; /* Increase font size */
+  background-color: transparent;
+}
+
+.btn-outline-success:hover {
+  background-color: #ffc400; /* Background color on hover */
+  color: #ffffff; /* White text color on hover */
+}
+
   
   

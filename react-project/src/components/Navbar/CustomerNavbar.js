@@ -19,14 +19,15 @@ const CustomerNavbar = () => {
         <Navbar.Toggle aria-controls='customer-navbar-nav' />
         <Navbar.Collapse id='customer-navbar-nav'>
           <Nav className='me-auto justify-content-end w-100'>
-          <Link to="/customerdashboard" className='nav-link active text-uppercase'>Home</Link>
+            <Link to="/customerdashboard" className='nav-link active text-uppercase'>Home</Link>
             <Link to="/menu" className='nav-link text-uppercase'>Menu</Link>
             <Link to="/gallery" className='nav-link text-uppercase'>Gallery</Link>
             <Link to="/reservation" className='nav-link text-uppercase'>Reservation</Link>
             <Link to="/about" className='nav-link text-uppercase'>About</Link>
             <Link to="/contact" className='nav-link text-uppercase'>Contact</Link>
+            <Link to="/feedback" className='nav-link text-uppercase'>Feedback</Link>
             <Link to='/cart' className='nav-link text-uppercase cart-icon' aria-label="Cart">
-              <FaShoppingCart style={{ fontSize: '2rem' }} />
+              <FaShoppingCart style={{ fontSize: '2rem', color: 'green' }} />
             </Link>
           </Nav>
         </Navbar.Collapse>

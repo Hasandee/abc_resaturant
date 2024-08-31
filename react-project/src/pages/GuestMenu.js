@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Menu.css';
 import { menu_list } from '../assets/assets';
-import FoodDisplay from '../components/FoodDisplay/FoodDisplay';
+import GuestFoodDisplay from '../components/GuestFoodDisplay/GuestFoodDisplay';
 import Footer from '../components/Footer/Footer';
-import CustomerNavbar from '../components/Navbar/CustomerNavbar'; 
+import HomeNavbar from '../components/Navbar/HomeNavbar';
 
 
 
@@ -12,7 +12,7 @@ const Menu = () => {
 
     return (
         <div className='explore-menu' id='explore-menu'>
-            <CustomerNavbar /> 
+            <HomeNavbar /> 
             <h1>Menu</h1>
             <p className='explore-menu-text'>
             Discover our delicious offerings, carefully crafted to satisfy every palate. From savory appetizers to mouth-watering main courses, refreshing beverages, and delightful desserts, explore a variety of dishes that cater to every taste. </p>
@@ -26,7 +26,7 @@ const Menu = () => {
                 ))}
             </div>
             <hr />
-            <FoodDisplay category={category} />
+            <GuestFoodDisplay category={category} />
            
             <Footer />
         </div>

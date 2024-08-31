@@ -37,7 +37,7 @@ const LoginPopup = ({ setShowLogin }) => {
     } else {
       // Login logic here
       if (userType === "customer") {
-        navigate('/reservation');
+        navigate('/customerdashboard');
       } else if (userType === "admin") {
         navigate('/admindashboard');
       } else if (userType === "staff") {
@@ -63,16 +63,7 @@ const LoginPopup = ({ setShowLogin }) => {
                 onChange={(e) => setUsername(e.target.value)} 
                 required 
               />
-              <select 
-                className='login-popup-select' 
-                value={userType} 
-                onChange={(e) => setUserType(e.target.value)} 
-                required
-              >
-                <option value="customer">Customer</option>
-                <option value="staff">Staff</option>
-                <option value="admin">Admin</option>
-              </select>
+              
             </>
           )}
           <input 

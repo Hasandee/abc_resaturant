@@ -27,7 +27,7 @@ const Gallery = () => {
       <header className="gallery-header">
         <h1>Good food is the foundation of genuine happiness</h1>
         <div className="search-bar">
-          <input type="text" placeholder="Search for art..." />
+          <input type="text" placeholder="Search for food..." />
           <button type="submit" className="search-button">
             Search
           </button>
