@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import CustomerNavbar from '../Navbar/CustomerNavbar';
 import './Feedback.css';
+import CustomerNavbar from '../Navbar/CustomerNavbar';
 
-const FeedbackForm = () => {
+const Feedback = () => {
     const [feedback, setFeedback] = useState({
         userId: '',
         message: '',
@@ -22,7 +22,7 @@ const FeedbackForm = () => {
         e.preventDefault();
         feedback.date = new Date().toISOString().split('T')[0]; // Set the current date
         try {
-            const response = await axios.post('/feedback', feedback);
+            const response = await axios.post('http://localhost:8080/feedback', feedback); // Ensure this matches your backend
             console.log('Feedback submitted:', response.data);
             alert('Thank you for your feedback!');
             setFeedback({ userId: '', message: '', rating: 1, date: '' });
@@ -33,13 +33,11 @@ const FeedbackForm = () => {
     };
 
     return (
-        <div className='feedback'>
-             <CustomerNavbar /> 
-        
         <form onSubmit={handleSubmit} className="feedback-form">
             <h2>Submit Your Feedback</h2>
 
             <div className="form-group">
+                <CustomerNavbar />
                 <label htmlFor="userId">User ID:</label>
                 <input
                     type="text"
@@ -81,8 +79,7 @@ const FeedbackForm = () => {
 
             <button type="submit">Submit Feedback</button>
         </form>
-        </div>
     );
 };
 
-export default FeedbackForm;
+export default Feedback;

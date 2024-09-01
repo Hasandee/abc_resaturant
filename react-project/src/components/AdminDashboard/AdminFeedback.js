@@ -19,7 +19,9 @@ const AdminFeedback = () => {
     const fetchFeedbacks = async () => {
         try {
             const response = await axios.get('/feedback');
-            setFeedbacks(response.data);
+            console.log(response.data); // Log the response data to check the structure
+            // Ensure response.data is an array
+            setFeedbacks(Array.isArray(response.data) ? response.data : []);
         } catch (error) {
             console.error('Error fetching feedbacks:', error);
         }
@@ -30,16 +32,6 @@ const AdminFeedback = () => {
             ...newFeedback,
             [e.target.name]: e.target.value
         });
-    };
-
-    const handleAddFeedback = async () => {
-        try {
-            await axios.post('/feedback', newFeedback);
-            fetchFeedbacks();
-            setNewFeedback({ userId: '', message: '', rating: 1, date: '' });
-        } catch (error) {
-            console.error('Error adding feedback:', error);
-        }
     };
 
     const handleEditFeedback = async () => {
@@ -73,39 +65,12 @@ const AdminFeedback = () => {
         <div className="admin-feedback-page">
             <h1>Manage Feedbacks</h1>
 
-            <h2>Add New Feedback</h2>
-            <div className="form-group">
-                <label>User ID:</label>
-                <input
-                    type="text"
-                    name="userId"
-                    value={newFeedback.userId}
-                    onChange={handleInputChange}
-                />
-            </div>
-            <div className="form-group">
-                <label>Message:</label>
-                <textarea
-                    name="message"
-                    value={newFeedback.message}
-                    onChange={handleInputChange}
-                />
-            </div>
-            <div className="form-group">
-                <label>Rating:</label>
-                <select
-                    name="rating"
-                    value={newFeedback.rating}
-                    onChange={handleInputChange}
-                >
-                    {[1, 2, 3, 4, 5].map((r) => (
-                        <option key={r} value={r}>
-                            {r}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <button onClick={handleAddFeedback}>Add Feedback</button>
+           
+           
+           
+            
+          
+           
 
             <h2>Existing Feedbacks</h2>
             <table>
@@ -119,18 +84,24 @@ const AdminFeedback = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {feedbacks.map((feedback) => (
-                        <tr key={feedback.feedbackId}>
-                            <td>{feedback.userId}</td>
-                            <td>{feedback.message}</td>
-                            <td>{feedback.rating}</td>
-                            <td>{feedback.date}</td>
-                            <td>
-                                <button onClick={() => handleEditClick(feedback)}>Edit</button>
-                                <button onClick={() => handleDeleteFeedback(feedback.feedbackId)}>Delete</button>
-                            </td>
+                    {Array.isArray(feedbacks) && feedbacks.length > 0 ? (
+                        feedbacks.map((feedback) => (
+                            <tr key={feedback.feedbackId}>
+                                <td>{feedback.userId}</td>
+                                <td>{feedback.message}</td>
+                                <td>{feedback.rating}</td>
+                                <td>{feedback.date}</td>
+                                <td>
+                                    <button onClick={() => handleEditClick(feedback)}>Edit</button>
+                                    <button onClick={() => handleDeleteFeedback(feedback.feedbackId)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="5">No feedbacks found.</td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
 

@@ -22,6 +22,7 @@ import StaffReservations from './components/StaffDashboard/StaffReservations';
 import Feedback from './components/Feedback/Feedback';
 import AdminFeedback from './components/AdminDashboard/AdminFeedback';
 import GuestMenu from './pages/GuestMenu';
+import AdminProduct from './components/AdminDashboard/AdminProduct';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -65,6 +66,7 @@ const App = () => {
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/adminfeedback" element={<AdminFeedback />} />
           <Route path="/guestmenu" element={<GuestMenu />} />
+          <Route path="/adminproduct" element={<AdminProduct />} />
         </Routes>
       </div>
     </>

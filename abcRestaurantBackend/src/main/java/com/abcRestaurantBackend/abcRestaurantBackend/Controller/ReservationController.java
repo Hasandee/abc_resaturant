@@ -51,14 +51,7 @@ public class ReservationController {
         reservationService.deleteReservation(reservationId);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping("/confirm/{reservationId}")
-    public ResponseEntity<Reservation> confirmReservation(@PathVariable String reservationId) {
-        try {
-            Reservation confirmedReservation = reservationService.confirmReservation(reservationId);
-            return new ResponseEntity<>(confirmedReservation, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
     }
 
-}
+

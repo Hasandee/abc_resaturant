@@ -24,7 +24,12 @@ const StaffReservations = () => {
     const fetchReservations = () => {
         axios.get('/reservation')
             .then(response => {
-                setReservations(response.data);
+                if (Array.isArray(response.data)) {
+                    setReservations(response.data);
+                } else {
+                    setReservations([]);
+                    console.error("Unexpected response format", response.data);
+                }
             })
             .catch(error => {
                 console.error("There was an error fetching the reservations!", error);
@@ -243,27 +248,33 @@ const StaffReservations = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {reservations.map(reservation => (
-                            <tr key={reservation.reservationId}>
-                                <td>{reservation.reservationId}</td>
-                                <td>{reservation.userId}</td>
-                                <td>{reservation.reservationDate}</td>
-                                <td>{reservation.reservationType}</td>
-                                <td>{reservation.numberOfPeople}</td>
-                                <td>{reservation.specialRequests}</td>
-                                <td>{reservation.status}</td>
-                                <td>{reservation.branch}</td>
-                                <td>{reservation.phone}</td>
-                                <td>{reservation.email}</td>
-                                <td>
-                                    <button onClick={() => handleEditReservation(reservation)}>Edit</button>
-                                    <button onClick={() => handleDeleteReservation(reservation.reservationId)}>Delete</button>
-                                    {reservation.status !== 'Confirmed' && (
-                                        <button onClick={() => handleConfirmReservation(reservation.reservationId)}>Confirm</button>
-                                    )}
-                                </td>
+                        {reservations.length > 0 ? (
+                            reservations.map(reservation => (
+                                <tr key={reservation.reservationId}>
+                                    <td>{reservation.reservationId}</td>
+                                    <td>{reservation.userId}</td>
+                                    <td>{reservation.reservationDate}</td>
+                                    <td>{reservation.reservationType}</td>
+                                    <td>{reservation.numberOfPeople}</td>
+                                    <td>{reservation.specialRequests}</td>
+                                    <td>{reservation.status}</td>
+                                    <td>{reservation.branch}</td>
+                                    <td>{reservation.phone}</td>
+                                    <td>{reservation.email}</td>
+                                    <td>
+                                        <button onClick={() => handleEditReservation(reservation)}>Edit</button>
+                                        <button onClick={() => handleDeleteReservation(reservation.reservationId)}>Delete</button>
+                                        {reservation.status !== 'Confirmed' && (
+                                            <button onClick={() => handleConfirmReservation(reservation.reservationId)}>Confirm</button>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan="11">No reservations found.</td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
