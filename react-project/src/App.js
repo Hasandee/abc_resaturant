@@ -23,6 +23,7 @@ import Feedback from './components/Feedback/Feedback';
 import AdminFeedback from './components/AdminDashboard/AdminFeedback';
 import GuestMenu from './pages/GuestMenu';
 import AdminProduct from './components/AdminDashboard/AdminProduct';
+import ExampleComponent from './components/ExampleComponent';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -67,6 +68,7 @@ const App = () => {
           <Route path="/adminfeedback" element={<AdminFeedback />} />
           <Route path="/guestmenu" element={<GuestMenu />} />
           <Route path="/adminproduct" element={<AdminProduct />} />
+          <Route path="/examplecomponent" element={<ExampleComponent />} />
         </Routes>
       </div>
     </>

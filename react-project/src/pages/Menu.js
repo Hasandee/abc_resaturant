@@ -15,7 +15,7 @@ const Menu = () => {
 
     const fetchFoodItems = async () => {
         try {
-            const response = await axios.get('/product');  // Fetch food items from backend
+            const response = await axios.get('http://localhost:8080/product');  // Fetch food items from backend
             setFoodItems(response.data);
         } catch (error) {
             console.error("Error fetching food items:", error);
@@ -32,9 +32,17 @@ const Menu = () => {
 
             <div className="explore-menu-list">
                 {foodItems.map((item, index) => (
-                    <div onClick={() => setCategory(prev => prev === item.category ? "All" : item.category)} key={index} className='explore-menu-list-item'>
-                        <img className={category === item.category ? "active" : ""} src={item.imageUrl} alt='' />
-                        <p>{item.category}</p>
+                    <div key={index} className='explore-menu-list-item'>
+                        {/* Update the image source to fetch it from the backend */}
+                        <img
+                            className={category === item.category ? "active" : ""}
+                            src={`http://localhost:8080/images/${item.imageUrl.split('\\').pop()}`}  // Extracting image name from the full path
+                            alt={item.name}
+                            onClick={() => setCategory(prev => prev === item.category ? "All" : item.category)}
+                        />
+                        <h2>{item.name}</h2>
+                        <p>{item.description}</p>
+                        <p><strong>Price:</strong> ${item.price}</p>
                     </div>
                 ))}
             </div>

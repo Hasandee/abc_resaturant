@@ -1,25 +1,47 @@
-// src/components/AdminReservations.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './AdminReservations.css';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const AdminReservations = () => {
     const [reservations, setReservations] = useState([]);
 
     useEffect(() => {
-        // Fetch all reservations from the backend
-        axios.get('/reservation')
-            .then(response => {
-                setReservations(response.data);
-            })
-            .catch(error => {
-                console.error("There was an error fetching the reservations!", error);
-            });
+        fetchReservations();
     }, []);
+
+    const fetchReservations = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/reservation');
+            setReservations(response.data);
+        } catch (error) {
+            console.error('Failed to fetch reservations:', error);
+        }
+    };
+
+    const generatePDF = () => {
+        const doc = new jsPDF();
+        doc.text('Reservations Report', 14, 22);
+        doc.autoTable({
+            startY: 30,
+            head: [['Reservation ID', 'User ID', 'Date', 'Type', 'Number of People', 'Special Requests', 'Status', 'Branch']],
+            body: reservations.map(reservation => [
+                reservation.reservationId || '',
+                reservation.userId || '',
+                new Date(reservation.reservationDate).toLocaleString() || '',
+                reservation.reservationType || '',
+                reservation.numberOfPeople || '',
+                reservation.specialRequests || '',
+                reservation.status || '',
+                reservation.branch || ''
+            ]),
+        });
+        doc.save('reservations_report.pdf');
+    };
 
     return (
         <div className="admin-reservations">
-            <h2>All Reservations</h2>
+            <button onClick={generatePDF}>Generate PDF Report</button>
             <table>
                 <thead>
                     <tr>
@@ -38,7 +60,7 @@ const AdminReservations = () => {
                         <tr key={reservation.reservationId}>
                             <td>{reservation.reservationId}</td>
                             <td>{reservation.userId}</td>
-                            <td>{reservation.reservationDate}</td>
+                            <td>{new Date(reservation.reservationDate).toLocaleString()}</td>
                             <td>{reservation.reservationType}</td>
                             <td>{reservation.numberOfPeople}</td>
                             <td>{reservation.specialRequests}</td>

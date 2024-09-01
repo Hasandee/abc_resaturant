@@ -9,7 +9,7 @@ const AdminProduct = () => {
         name: '',
         description: '',
         price: '',
-        imageUrl: '',
+        imageUrl: null, // Change initial value to null
         categoryId: '',
         availability: true
     });
@@ -33,14 +33,45 @@ const AdminProduct = () => {
         setProduct({ ...product, [name]: value });
     };
 
+    const handleFileChange = (e) => {
+        setProduct({ ...product, imageUrl: e.target.files[0] });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (isEditing) {
-            await axios.put(`/product/${product.productId}`, product);
-        } else {
-            await axios.post('/product', product);
+        const formData = new FormData();
+        formData.append('name', product.name);
+        formData.append('description', product.description);
+        formData.append('price', product.price);
+        formData.append('categoryId', product.categoryId);
+        formData.append('availability', product.availability);
+        if (product.imageUrl) {
+            formData.append('file', product.imageUrl);
         }
-        setProduct({ productId: '', name: '', description: '', price: '', imageUrl: '', categoryId: '', availability: true });
+
+        if (isEditing) {
+            await axios.put(`/product/${product.productId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+        } else {
+            await axios.post('/product', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+        }
+
+        setProduct({
+            productId: '',
+            name: '',
+            description: '',
+            price: '',
+            imageUrl: null, // Reset to null after submission
+            categoryId: '',
+            availability: true
+        });
         setIsEditing(false);
         fetchProducts();
     };
@@ -87,9 +118,7 @@ const AdminProduct = () => {
                     type="file"
                     name="imageUrl"
                     placeholder="Image URL"
-                    value={product.imageUrl}
-                    onChange={handleChange}
-                    required
+                    onChange={handleFileChange}
                 />
                 <input
                     type="text"
