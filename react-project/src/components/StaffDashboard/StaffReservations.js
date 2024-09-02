@@ -5,7 +5,7 @@ import './StaffReservation.css';
 const StaffReservations = () => {
     const [reservations, setReservations] = useState([]);
     const [newReservation, setNewReservation] = useState({
-        userId: '',
+        userName: '',
         reservationDate: '',
         reservationType: '',
         numberOfPeople: '',
@@ -46,7 +46,7 @@ const StaffReservations = () => {
             .then(() => {
                 fetchReservations();
                 setNewReservation({
-                    userId: '',
+                    userName: '',
                     reservationDate: '',
                     reservationType: '',
                     numberOfPeople: '',
@@ -105,8 +105,8 @@ const StaffReservations = () => {
                 <h3>Add New Reservation</h3>
                 <input
                     type="text"
-                    name="userId"
-                    placeholder="User ID"
+                    name="userName"
+                    placeholder="User Name"
                     value={newReservation.userId}
                     onChange={handleInputChange}
                 />
@@ -173,13 +173,13 @@ const StaffReservations = () => {
                     />
                     <input
                         type="text"
-                        name="userId"
-                        placeholder="User ID"
-                        value={editReservation.userId}
+                        name="userName"
+                        placeholder="User Name"
+                        value={editReservation.userName}
                         onChange={e => setEditReservation({ ...editReservation, userId: e.target.value })}
                     />
                     <input
-                        type="date"
+                        type="reservationDate"
                         name="reservationDate"
                         value={editReservation.reservationDate}
                         onChange={e => setEditReservation({ ...editReservation, reservationDate: e.target.value })}
@@ -235,8 +235,8 @@ const StaffReservations = () => {
                     <thead>
                         <tr>
                             <th>Reservation ID</th>
-                            <th>User ID</th>
-                            <th>Date</th>
+                            <th>User Name</th>
+                            <th>Reservation Date</th>
                             <th>Type</th>
                             <th>People</th>
                             <th>Special Requests</th>
@@ -252,7 +252,7 @@ const StaffReservations = () => {
                             reservations.map(reservation => (
                                 <tr key={reservation.reservationId}>
                                     <td>{reservation.reservationId}</td>
-                                    <td>{reservation.userId}</td>
+                                    <td>{reservation.userName}</td>
                                     <td>{reservation.reservationDate}</td>
                                     <td>{reservation.reservationType}</td>
                                     <td>{reservation.numberOfPeople}</td>

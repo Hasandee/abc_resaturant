@@ -24,6 +24,8 @@ import AdminFeedback from './components/AdminDashboard/AdminFeedback';
 import GuestMenu from './pages/GuestMenu';
 import AdminProduct from './components/AdminDashboard/AdminProduct';
 import ExampleComponent from './components/ExampleComponent';
+import Offers from './pages/Offers';
+import AdminOffers from './components/AdminDashboard/AdminOffers';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -69,6 +71,8 @@ const App = () => {
           <Route path="/guestmenu" element={<GuestMenu />} />
           <Route path="/adminproduct" element={<AdminProduct />} />
           <Route path="/examplecomponent" element={<ExampleComponent />} />
+          <Route path="/offers" element={<Offers />} />
+          <Route path="/adminoffers" element={<AdminOffers />} />
         </Routes>
       </div>
     </>

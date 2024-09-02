@@ -2,7 +2,6 @@ package com.abcRestaurantBackend.abcRestaurantBackend.Controller;
 
 import com.abcRestaurantBackend.abcRestaurantBackend.Model.Offer;
 import com.abcRestaurantBackend.abcRestaurantBackend.Service.OfferService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/offer")
@@ -24,9 +22,9 @@ public class OfferController {
         return new ResponseEntity<>(offerService.allOffer(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Offer>> getSingleOffer(@PathVariable ObjectId id) {
-        return new ResponseEntity<>(offerService.singleOffer(id), HttpStatus.OK);
+    @GetMapping("/{offerId}")
+    public ResponseEntity<Optional<Offer>> getSingleOffer(@PathVariable String offerId) {
+        return new ResponseEntity<>(offerService.singleOffer(offerId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -35,17 +33,15 @@ public class OfferController {
         return new ResponseEntity<>(newOffer, HttpStatus.CREATED);
     }
 
-    // Update an existing offer by id
-    @PutMapping("/{id}")
-    public ResponseEntity<Offer> updateOffer(@PathVariable("id") ObjectId id, @RequestBody Offer offer) {
-        Offer updatedOffer = offerService.updateOffer(id, offer);
+    @PutMapping("/{offerId}")
+    public ResponseEntity<Offer> updateOffer(@PathVariable("offerId") String offerId, @RequestBody Offer offer) {
+        Offer updatedOffer = offerService.updateOffer(offerId, offer);
         return ResponseEntity.ok(updatedOffer);
     }
 
-    // Delete an offer by id
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOffer(@PathVariable("id") ObjectId id) {
-        offerService.deleteOffer(id);
+    @DeleteMapping("/{offerId}")
+    public ResponseEntity<Void> deleteOffer(@PathVariable("offerId") String offerId) {
+        offerService.deleteOffer(offerId);
         return ResponseEntity.noContent().build();
     }
 }

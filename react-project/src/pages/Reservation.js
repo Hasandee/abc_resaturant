@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './Reservation.css';
-import CustomerNavbar from '../components/Navbar/CustomerNavbar'; // Correct import
+import CustomerNavbar from '../components/Navbar/CustomerNavbar';
 
 const Reservation = () => {
     const [formData, setFormData] = useState({
-        name: '',
-        date: '',
+        userName: '',  // Add userId field
+        reservationType: '',  // Add reservationType field
+        reservationDate: '',
         time: '',
         numberOfPeople: '',
         specialRequests: '',
@@ -14,7 +15,7 @@ const Reservation = () => {
         email: ''
     });
 
-    const branches = ['Downtown', 'Uptown', 'Midtown', 'Suburbs'];
+    const branches = ['Townhall Branch', 'Rajagiriya Branch', 'Borella Branch'];
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,7 +29,7 @@ const Reservation = () => {
         e.preventDefault();
         
         try {
-            const response = await fetch('/reservation', { // Ensure this matches backend path
+            const response = await fetch('http://localhost:8080/reservation', { // Ensure this matches backend path
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,8 +44,9 @@ const Reservation = () => {
             if (response.ok) {
                 alert('Reservation successfully added');
                 setFormData({
-                    name: '',
-                    date: '',
+                    userName: '',
+                    reservationType: '',
+                    reservationDate: '',
                     time: '',
                     numberOfPeople: '',
                     specialRequests: '',
@@ -67,11 +69,21 @@ const Reservation = () => {
             <form onSubmit={handleSubmit}>
                 <h2>Reservation Form</h2>
                 <div>
-                    <label>Name:</label>
+                    <label>User Name:</label> {/* Add userId field */}
                     <input 
                         type="text" 
-                        name="name" 
-                        value={formData.name} 
+                        name="userName" 
+                        value={formData.userName} 
+                        onChange={handleChange} 
+                        required 
+                    />
+                </div>
+                <div>
+                    <label>Reservation Type:</label> {/* Add reservationType field */}
+                    <input 
+                        type="text" 
+                        name="reservationType" 
+                        value={formData.reservationType} 
                         onChange={handleChange} 
                         required 
                     />
@@ -80,8 +92,8 @@ const Reservation = () => {
                     <label>Date:</label>
                     <input 
                         type="datetime-local" 
-                        name="date" 
-                        value={formData.date} 
+                        name="reservationDate" 
+                        value={formData.reservationDate} 
                         onChange={handleChange} 
                         required 
                     />

@@ -14,13 +14,13 @@ public class Reservation {
     @Id
     private String id;
     private String reservationId;
-    private String userId;
-    private String reservationDate;
+    private String userName;
+    private String reservationDate; // Change type to Date if you want to store it as Date
     private String reservationType;
     private int numberOfPeople;
     private String specialRequests;
     private String branch;
     private String status;
-    private String phone; // New field
-    private String email; // New field
+    private String phone;
+    private String email;
 }
