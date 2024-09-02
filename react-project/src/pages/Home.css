@@ -1,5 +1,3 @@
-/* Home.css */
-
 
 .home-page header {
     background-image: url(../utils/img/img1.jpg);
@@ -16,7 +14,7 @@ header {
     background-size: cover;
     background-position: center;
     height: 100%; 
-    z-index: 1; /* Ensure the header is behind other content */
+    z-index: 1; 
 }
 
 header h1 {
@@ -34,8 +32,8 @@ header h1 {
     border-color: #daa800 !important;
     color: #ffffff !important;
     padding: 8px 16px;
-    width: auto;        /* Or set a specific width like 100px */
-    height: auto;       /* Or set a specific height like 40px */
+    width: auto;       
+    height: auto;      
     border-radius: 5px;
 }
 

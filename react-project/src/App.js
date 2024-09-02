@@ -26,6 +26,7 @@ import AdminProduct from './components/AdminDashboard/AdminProduct';
 import ExampleComponent from './components/ExampleComponent';
 import Offers from './pages/Offers';
 import AdminOffers from './components/AdminDashboard/AdminOffers';
+import AdminBranch from './components/AdminDashboard/AdminBranch';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -73,6 +74,7 @@ const App = () => {
           <Route path="/examplecomponent" element={<ExampleComponent />} />
           <Route path="/offers" element={<Offers />} />
           <Route path="/adminoffers" element={<AdminOffers />} />
+          <Route path="/adminbranch" element={<AdminBranch />} />
         </Routes>
       </div>
     </>

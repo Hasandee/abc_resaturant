@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Offers.css'; // Make sure to import the CSS file
+import OfferImage from '../utils/img/img15.jpg'; 
 
 const Offers = () => {
     const [offers, setOffers] = useState([]);
@@ -18,14 +19,12 @@ const Offers = () => {
                 {offers.map(offer => (
                     <li key={offer.offerId} className="offer-item">
                         <div className="offer-image">
-                            {/* Replace with the actual image or icon */}
-                            <img src="scooter.png" alt="Offer" />
+                            <img src={OfferImage} alt="Offer" />
                         </div>
                         <div className="offer-details">
-                            <p className="offer-code">Use Promo Code: {offer.offerCode}</p>
+                            <p className="offer-code"> {offer.offerCode}</p>
                             <p className="offer-description">{offer.description}</p>
                             <p className="offer-discount">Discount: {offer.discountPercentage}%</p>
-                            <p className="offer-timestamp">7 hours ago</p>
                             <p className="offer-terms">Terms & Conditions</p>
                         </div>
                     </li>
