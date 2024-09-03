@@ -27,7 +27,6 @@ import ExampleComponent from './components/ExampleComponent';
 import Offers from './pages/Offers';
 import AdminOffers from './components/AdminDashboard/AdminOffers';
 import AdminBranch from './components/AdminDashboard/AdminBranch';
-import Facilities from './components/Facilities/Facilities';
 import AdminCategory from './components/AdminDashboard/AdminCategory';
 import AdminOrder from './components/AdminDashboard/AdminOrder';
 import StaffOrder from './components/StaffDashboard/StaffOrder';
@@ -35,6 +34,8 @@ import Query from './components/Query/Query';
 import StaffQuery from './components/StaffDashboard/StaffQuery';
 import ViewQuery from './components/ViewQuery';
 import AdminQuery from './components/AdminDashboard/AdminQuery';
+import AdminFacility from './components/AdminDashboard/AdminFacility';
+import Facility from './components/Facilities/Facility';
 
 
 const App = () => {
@@ -91,7 +92,7 @@ const isStaffRoute = location.pathname.startsWith('/staffdashboard') ||
           <Route path="/offers" element={<Offers />} />
           <Route path="/adminoffers" element={<AdminOffers />} />
           <Route path="/adminbranch" element={<AdminBranch />} />
-          <Route path="/facilities" element={<Facilities />} />
+          <Route path="/facility" element={<Facility />} />
           <Route path="/admincategory" element={<AdminCategory />} />
           <Route path="/adminorder" element={<AdminOrder />} />
           <Route path="/admin/orders/add" element={<AdminOrder />} />
@@ -101,6 +102,7 @@ const isStaffRoute = location.pathname.startsWith('/staffdashboard') ||
         <Route path="/staffquery" element={<StaffQuery />} />
         <Route path="/viewquery" element={<ViewQuery />} />
         <Route path="/adminquery" element={<AdminQuery />} />
+        <Route path="/adminfacility" element={<AdminFacility />} />
         
        
         </Routes>
