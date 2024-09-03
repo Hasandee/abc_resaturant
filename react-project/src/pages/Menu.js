@@ -1,54 +1,81 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Menu.css';
-import FoodDisplay from '../components/FoodDisplay/FoodDisplay';
-import Footer from '../components/Footer/Footer';
-import CustomerNavbar from '../components/Navbar/CustomerNavbar';
+import './Menu.css'; // Make sure you have a CSS file for styling
 
 const Menu = () => {
-    const [category, setCategory] = useState("All");
-    const [foodItems, setFoodItems] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
-        fetchFoodItems();
+        // Fetch products from the backend
+        axios.get('/product')
+            .then(response => {
+                setProducts(response.data);
+
+                // Extract unique categories from the products
+                const uniqueCategories = [...new Set(response.data.map(product => product.category || "Uncategorized"))];
+                setCategories(uniqueCategories);
+
+                // Set filtered products initially to all products
+                setFilteredProducts(response.data);
+            })
+            .catch(error => console.error('Error fetching products:', error));
     }, []);
 
-    const fetchFoodItems = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/product');  // Fetch food items from backend
-            setFoodItems(response.data);
-        } catch (error) {
-            console.error("Error fetching food items:", error);
+    const filterByCategory = (category) => {
+        setSelectedCategory(category);
+        if (category === '') {
+            setFilteredProducts(products);
+        } else {
+            setFilteredProducts(products.filter(product => product.category === category));
         }
     };
 
-    return (
-        <div className='explore-menu' id='explore-menu'>
-            <CustomerNavbar />
-            <h1>Menu</h1>
-            <p className='explore-menu-text'>
-                Discover our delicious offerings, carefully crafted to satisfy every palate. From savory appetizers to mouth-watering main courses, refreshing beverages, and delightful desserts, explore a variety of dishes that cater to every taste.
-            </p>
+    const addToCart = (product) => {
+        // Implement add to cart logic here
+        console.log('Added to cart:', product);
+    };
 
-            <div className="explore-menu-list">
-                {foodItems.map((item, index) => (
-                    <div key={index} className='explore-menu-list-item'>
-                        {/* Update the image source to fetch it from the backend */}
-                        <img
-                            className={category === item.category ? "active" : ""}
-                            src={`http://localhost:8080/images/${item.imageUrl.split('\\').pop()}`}  // Extracting image name from the full path
-                            alt={item.name}
-                            onClick={() => setCategory(prev => prev === item.category ? "All" : item.category)}
-                        />
-                        <h2>{item.name}</h2>
-                        <p>{item.description}</p>
-                        <p><strong>Price:</strong> ${item.price}</p>
+    return (
+        <div className="menu-container">
+            <h2>Our Menu</h2>
+
+            {/* Categories Section */}
+            <div className="categories">
+                <button
+                    key="all"
+                    className={`category-button ${selectedCategory === '' ? 'active' : ''}`}
+                    onClick={() => filterByCategory('')}
+                >
+                    All
+                </button>
+                {categories.map(category => (
+                    <button
+                        key={category}
+                        className={`category-button ${selectedCategory === category ? 'active' : ''}`}
+                        onClick={() => filterByCategory(category)}
+                    >
+                        {category}
+                    </button>
+                ))}
+            </div>
+
+            {/* Products Section */}
+            <div className="products">
+                {filteredProducts.map(product => (
+                    <div key={product.id} className="product-card">
+                        <img src={`./image/${product.imageUrl}`} alt={product.name} className="product-image" />
+                        <h3>{product.name}</h3>
+                        <p>{product.description}</p>
+                        <p>${product.price.toFixed(2)}</p>
+                        <button onClick={() => addToCart(product)} className="add-to-cart-button">
+                            Add to Cart
+                        </button>
                     </div>
                 ))}
             </div>
-            <hr />
-            <FoodDisplay category={category} foodItems={foodItems} />
-            <Footer />
         </div>
     );
 };

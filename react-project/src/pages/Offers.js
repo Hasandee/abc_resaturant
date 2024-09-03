@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Offers.css'; // Make sure to import the CSS file
 import OfferImage from '../utils/img/img15.jpg'; 
 
+
 const Offers = () => {
     const [offers, setOffers] = useState([]);
 
@@ -14,7 +15,8 @@ const Offers = () => {
 
     return (
         <div className="offers-container">
-            <h2>Available Offers</h2>
+            
+            <h2>AVAILABLE OFFERS</h2>
             <ul className="offers-list">
                 {offers.map(offer => (
                     <li key={offer.offerId} className="offer-item">

@@ -27,6 +27,9 @@ import ExampleComponent from './components/ExampleComponent';
 import Offers from './pages/Offers';
 import AdminOffers from './components/AdminDashboard/AdminOffers';
 import AdminBranch from './components/AdminDashboard/AdminBranch';
+import Facilities from './components/Facilities/Facilities';
+import AdminCategories from './components/AdminDashboard/AdminCategories';
+
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -75,6 +78,8 @@ const App = () => {
           <Route path="/offers" element={<Offers />} />
           <Route path="/adminoffers" element={<AdminOffers />} />
           <Route path="/adminbranch" element={<AdminBranch />} />
+          <Route path="/facilities" element={<Facilities />} />
+          <Route path="/admincategories" element={<AdminCategories />} />
         </Routes>
       </div>
     </>

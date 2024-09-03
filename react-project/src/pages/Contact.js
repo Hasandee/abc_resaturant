@@ -1,8 +1,8 @@
 // src/pages/Contact.js
 import React from 'react';
 import './Contact.css';
-import { ContactInfo } from '../components/ContactInfo';
-import AdminBranch from '../components/AdminDashboard/AdminBranch'; // Import the new component
+import Footer from '../components/Footer/Footer';
+import BranchList from '../components/BranchList'; // Import the BranchList component
 
 function Contact() {
     return (
@@ -16,16 +16,15 @@ function Contact() {
             <div className='container my-5'>
                 <div className='row'>
                     <div className='col-lg-6 d-flex justify-content-center'>
-                        {/* Contact information or other content */}
-                        <ContactInfo />
+                        
                     </div>
                 </div>
             </div>
 
-            <AdminBranch /> {/* Add the branch management section */}
+            <BranchList /> {/* Display the branches list on the Contact page */}
 
             <div className='bg-dark text-light py-5'>
-                {/* Footer or additional information */}
+                <Footer />
             </div>
         </div>
     );

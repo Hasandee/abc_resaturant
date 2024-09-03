@@ -25,6 +25,7 @@ header h1 {
 .home-page header h1,
 .home-page header h2 {
     text-shadow: 2px 2px 8px #ffffff;
+    text-align: left;
 }
 
 .home-page .custom-menu-btn {
@@ -84,4 +85,9 @@ img {
 .home-page .container {
     position: relative;
     z-index: 2;
+}
+
+.home-page .custom-menu-btn{
+    background-color: red;
+
 }

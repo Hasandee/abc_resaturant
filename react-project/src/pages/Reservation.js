@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import './Reservation.css';
 import CustomerNavbar from '../components/Navbar/CustomerNavbar';
+import ReservationImage from '../utils/img/img17.jpg'; 
 
 const Reservation = () => {
     const [formData, setFormData] = useState({
-        userName: '',  // Add userId field
-        reservationType: '',  // Add reservationType field
+        userName: '',
+        reservationType: '',
         reservationDate: '',
         time: '',
         numberOfPeople: '',
         specialRequests: '',
-        branch: '', 
-        phone: '', 
+        branch: '',
+        phone: '',
         email: ''
     });
 
@@ -29,7 +30,7 @@ const Reservation = () => {
         e.preventDefault();
         
         try {
-            const response = await fetch('http://localhost:8080/reservation', { // Ensure this matches backend path
+            const response = await fetch('http://localhost:8080/reservation', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,8 +51,8 @@ const Reservation = () => {
                     time: '',
                     numberOfPeople: '',
                     specialRequests: '',
-                    branch: '', 
-                    phone: '', 
+                    branch: '',
+                    phone: '',
                     email: ''
                 });
             } else {
@@ -64,94 +65,110 @@ const Reservation = () => {
     };
 
     return (
-        <div>
+        <div className="reservation-container">
             <CustomerNavbar /> 
-            <form onSubmit={handleSubmit}>
-                <h2>Reservation Form</h2>
-                <div>
-                    <label>User Name:</label> {/* Add userId field */}
-                    <input 
-                        type="text" 
-                        name="userName" 
-                        value={formData.userName} 
-                        onChange={handleChange} 
-                        required 
-                    />
+            <form className="reservation-form" onSubmit={handleSubmit}>
+                <div className="form-header">
+                    <img src={ReservationImage} alt="Header" /> {/* Add image URLs */}
                 </div>
-                <div>
-                    <label>Reservation Type:</label> {/* Add reservationType field */}
-                    <input 
-                        type="text" 
-                        name="reservationType" 
-                        value={formData.reservationType} 
-                        onChange={handleChange} 
-                        required 
-                    />
+                <h2>Get Reservation</h2>
+                
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>User Name:</label>
+                        <input 
+                            type="text" 
+                            name="userName" 
+                            value={formData.userName} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Reservation Type:</label>
+                        <input 
+                            type="text" 
+                            name="reservationType" 
+                            value={formData.reservationType} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label>Date:</label>
-                    <input 
-                        type="datetime-local" 
-                        name="reservationDate" 
-                        value={formData.reservationDate} 
-                        onChange={handleChange} 
-                        required 
-                    />
+                
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Date:</label>
+                        <input 
+                            type="datetime-local" 
+                            name="reservationDate" 
+                            value={formData.reservationDate} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Number of People:</label>
+                        <input 
+                            type="number" 
+                            name="numberOfPeople" 
+                            value={formData.numberOfPeople} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label>Number of People:</label>
-                    <input 
-                        type="number" 
-                        name="numberOfPeople" 
-                        value={formData.numberOfPeople} 
-                        onChange={handleChange} 
-                        required 
-                    />
+                
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Branch:</label>
+                        <select 
+                            name="branch" 
+                            value={formData.branch} 
+                            onChange={handleChange} 
+                            required
+                        >
+                            <option value="" disabled>Select Branch</option>
+                            {branches.map((branch, index) => (
+                                <option key={index} value={branch}>
+                                    {branch}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label>Phone Number:</label>
+                        <input 
+                            type="tel" 
+                            name="phone" 
+                            value={formData.phone} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label>Branch:</label>
-                    <select 
-                        name="branch" 
-                        value={formData.branch} 
-                        onChange={handleChange} 
-                        required
-                    >
-                        <option value="" disabled>Select Branch</option>
-                        {branches.map((branch, index) => (
-                            <option key={index} value={branch}>
-                                {branch}
-                            </option>
-                        ))}
-                    </select>
+                
+                <div className="form-row">
+                    <div className="form-group">
+                        <label>Email:</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            value={formData.email} 
+                            onChange={handleChange} 
+                            required 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Special Requests:</label>
+                        <textarea 
+                            name="specialRequests" 
+                            value={formData.specialRequests} 
+                            onChange={handleChange} 
+                        />
+                    </div>
                 </div>
-                <div>
-                    <label>Phone Number:</label>
-                    <input 
-                        type="tel" 
-                        name="phone" 
-                        value={formData.phone} 
-                        onChange={handleChange} 
-                        required 
-                    />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        value={formData.email} 
-                        onChange={handleChange} 
-                        required 
-                    />
-                </div>
-                <div>
-                    <label>Special Requests:</label>
-                    <textarea 
-                        name="specialRequests" 
-                        value={formData.specialRequests} 
-                        onChange={handleChange} 
-                    />
-                </div>
+
                 <button type="submit">Submit Reservation</button>
             </form>
         </div>

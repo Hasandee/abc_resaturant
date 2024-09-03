@@ -1,21 +1,42 @@
 body {
-    background-color: #e7d390; 
+    background-color: white; 
     margin: 0;
     font-family: Arial, sans-serif; 
     padding-top: 100px;
 }
 
 .offers-container {
+    position: relative; /* Necessary for positioning the pseudo-element */
     padding: 20px;
-    background-color: #e7d390; 
+    background-color: rgba(231, 211, 144, 0.8); /* Fallback color */
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 8px; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    overflow: hidden; /* Ensures the pseudo-element is contained within the border radius */
 }
-.offers-container h2{
+
+.offers-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../utils/img/img16.jpg'); /* Adjust the path as needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(10px); /* Adjust the blur level as needed */
+    z-index: 0; /* Places the image behind the content */
+}
+
+.offers-container h2 {
+    position: relative; /* Ensures the text is above the pseudo-element */
     font-size: 50px;
+    z-index: 1; /* Places the text above the blurred background */
+    color: #ffffff;
 }
 
 .offers-list {
@@ -23,6 +44,8 @@ body {
     padding: 0;
     width: 100%; 
     max-width: 600px; 
+    position: relative; /* Ensures the list is above the blurred background */
+    z-index: 1; /* Places the list above the blurred background */
 }
 
 .offer-item {
