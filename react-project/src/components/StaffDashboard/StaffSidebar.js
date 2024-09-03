@@ -32,7 +32,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/staffqueries" className="sidebar-link" activeClassName="active-link">
+          <NavLink to="/staffquery" className="sidebar-link" activeClassName="active-link">
             Queries
           </NavLink>
         </li>

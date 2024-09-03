@@ -26,6 +26,7 @@ const CustomerNavbar = () => {
             <Link to="/about" className='nav-link text-uppercase'>About</Link>
             <Link to="/contact" className='nav-link text-uppercase'>Contact</Link>
             <Link to="/feedback" className='nav-link text-uppercase'>Feedback</Link>
+            <Link to="/query" className='nav-link text-uppercase'>Query</Link>
             <Link to='/cart' className='nav-link text-uppercase cart-icon' aria-label="Cart">
               <FaShoppingCart style={{ fontSize: '2rem', color: 'ash' }} />
             </Link>

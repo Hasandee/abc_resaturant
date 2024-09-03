@@ -29,7 +29,7 @@ const HomeNavbar = ({ showNavbar = true, setShowLogin }) => {
             <Link to="/about" className='nav-link text-uppercase'>About</Link>
             <Link to="/contact" className='nav-link text-uppercase'>Contact</Link>
             <Link to="/facilities" className='nav-link text-uppercase'>Facilities</Link>
-            <Link to="/query" className='nav-link text-uppercase'>Query</Link>
+           
           </Nav>
           <Nav>
           <Button 
