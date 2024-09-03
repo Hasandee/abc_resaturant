@@ -16,6 +16,7 @@ const StaffReservations = () => {
         email: ''
     });
     const [editReservation, setEditReservation] = useState(null);
+    const [showAddForm, setShowAddForm] = useState(false); // New state to toggle form visibility
 
     useEffect(() => {
         fetchReservations();
@@ -56,6 +57,7 @@ const StaffReservations = () => {
                     phone: '',
                     email: ''
                 });
+                setShowAddForm(false); // Hide form after adding a reservation
             })
             .catch(error => {
                 console.error("There was an error adding the reservation!", error);
@@ -64,6 +66,7 @@ const StaffReservations = () => {
 
     const handleEditReservation = (reservation) => {
         setEditReservation({ ...reservation });
+        setShowAddForm(false); // Hide add form when editing
     };
 
     const handleUpdateReservation = () => {
@@ -101,65 +104,74 @@ const StaffReservations = () => {
 
     return (
         <div className="staff-reservations">
-            <div className="reservation-form">
-                <h3>Add New Reservation</h3>
-                <input
-                    type="text"
-                    name="userName"
-                    placeholder="User Name"
-                    value={newReservation.userId}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="date"
-                    name="reservationDate"
-                    value={newReservation.reservationDate}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    name="reservationType"
-                    placeholder="Reservation Type"
-                    value={newReservation.reservationType}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="number"
-                    name="numberOfPeople"
-                    placeholder="Number of People"
-                    value={newReservation.numberOfPeople}
-                    onChange={handleInputChange}
-                />
-                <textarea
-                    name="specialRequests"
-                    placeholder="Special Requests"
-                    value={newReservation.specialRequests}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    name="branch"
-                    placeholder="Branch"
-                    value={newReservation.branch}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    name="phone"
-                    placeholder="Phone"
-                    value={newReservation.phone}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={newReservation.email}
-                    onChange={handleInputChange}
-                />
-                <button onClick={handleAddReservation}>Add Reservation</button>
-            </div>
+            {/* Toggle Add Reservation Form */}
+            <button onClick={() => setShowAddForm(!showAddForm)}>
+                {showAddForm ? 'Cancel' : 'Add Reservation'}
+            </button>
 
+            {/* Add Reservation Form */}
+            {showAddForm && (
+                <div className="reservation-form">
+                    <h3>Add New Reservation</h3>
+                    <input
+                        type="text"
+                        name="userName"
+                        placeholder="User Name"
+                        value={newReservation.userName}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        type="date"
+                        name="reservationDate"
+                        value={newReservation.reservationDate}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        type="text"
+                        name="reservationType"
+                        placeholder="Reservation Type"
+                        value={newReservation.reservationType}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        type="number"
+                        name="numberOfPeople"
+                        placeholder="Number of People"
+                        value={newReservation.numberOfPeople}
+                        onChange={handleInputChange}
+                    />
+                    <textarea
+                        name="specialRequests"
+                        placeholder="Special Requests"
+                        value={newReservation.specialRequests}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        type="text"
+                        name="branch"
+                        placeholder="Branch"
+                        value={newReservation.branch}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        type="text"
+                        name="phone"
+                        placeholder="Phone"
+                        value={newReservation.phone}
+                        onChange={handleInputChange}
+                    />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={newReservation.email}
+                        onChange={handleInputChange}
+                    />
+                    <button onClick={handleAddReservation}>Submit Reservation</button>
+                </div>
+            )}
+
+            {/* Edit Reservation Form */}
             {editReservation && (
                 <div className="reservation-form">
                     <h3>Edit Reservation</h3>
@@ -176,7 +188,7 @@ const StaffReservations = () => {
                         name="userName"
                         placeholder="User Name"
                         value={editReservation.userName}
-                        onChange={e => setEditReservation({ ...editReservation, userId: e.target.value })}
+                        onChange={e => setEditReservation({ ...editReservation, userName: e.target.value })}
                     />
                     <input
                         type="reservationDate"
@@ -229,6 +241,7 @@ const StaffReservations = () => {
                 </div>
             )}
 
+            {/* Reservation List */}
             <div className="reservation-list">
                 <h3>Reservations</h3>
                 <table>

@@ -44,6 +44,12 @@ const App = () => {
                        location.pathname.startsWith('/adminuser') ||
                        location.pathname.startsWith('/adminfeedback');
 
+const isStaffRoute = location.pathname.startsWith('/staffdashboard') || 
+                       location.pathname.startsWith('/stafforder') ||
+                       location.pathname.startsWith('/staffreservation') ;
+                    
+
+
   const isCustomerDashboard = location.pathname === '/customerdashboard';
   
   return (
@@ -51,7 +57,7 @@ const App = () => {
       {showLogin ? <LoginPopup setShowLogin={setShowLogin}/> : null}
       <div className='app'>
         {/* Render HomeNavbar only if it's not an admin route */}
-        {!isAdminRoute && !isCustomerDashboard && <HomeNavbar setShowLogin={setShowLogin} />}  
+        {!isAdminRoute && !isCustomerDashboard && !isStaffRoute && <HomeNavbar setShowLogin={setShowLogin} />}  
         
         {/* Render CustomerNavbar only on the customer dashboard */}
         {isCustomerDashboard && <CustomerNavbar />}  

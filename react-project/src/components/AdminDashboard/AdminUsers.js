@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './AdminUsers.css';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -112,8 +114,14 @@ const AdminUsers = () => {
     setShowAddForm(false);
   };
 
+  const handleExportPDF = () => {
+    const doc = new jsPDF();
+    autoTable(doc, { html: '#user-table' });
+    doc.save('users.pdf');
+};
   return (
     <div className='admin-user-management'>
+      <button onClick={handleExportPDF}>Generate PDF</button>
       <button className="add-user-button" onClick={() => setShowAddForm(!showAddForm)}>
         {showAddForm ? 'Cancel' : 'Add User'}
       </button>
@@ -175,7 +183,7 @@ const AdminUsers = () => {
       )}
 
       <h2>Manage Users</h2>
-      <table>
+      <table id="user-table">
         <thead>
           <tr>
             <th>User ID</th>
