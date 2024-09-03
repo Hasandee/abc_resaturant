@@ -31,7 +31,7 @@ const Query = ({ userId }) => {
 
     return (
         <div className="query-form">
-            <h2>Submit Your Query</h2>
+            <h2><b>Submit Your Query</b></h2>
             {successMessage && <p>{successMessage}</p>}
             <form onSubmit={handleSubmit}>
                 <div>

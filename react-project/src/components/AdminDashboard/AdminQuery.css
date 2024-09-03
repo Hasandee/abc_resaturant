@@ -20,7 +20,7 @@
 }
 
 .staff-query-view table, th, td {
-    border: 6px solid #ddd;
+    border: 3px solid black;
     color: black;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .staff-query-view th {
-    background-color: #f4f4f4;
+    background-color: #e7d390;
     color: #333;
 }
 
