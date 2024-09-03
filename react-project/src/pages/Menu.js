@@ -1,81 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './Menu.css'; // Make sure you have a CSS file for styling
+import React, { useState } from 'react';
+import './GuestMenu.css';
+import { menu_list } from '../assets/assets';
+import GuestFoodDisplay from '../components/GuestFoodDisplay/GuestFoodDisplay';
+import Footer from '../components/Footer/Footer';
+import CustomerNavbar from '../components/Navbar/CustomerNavbar';
+
+
 
 const Menu = () => {
-    const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
-
-    useEffect(() => {
-        // Fetch products from the backend
-        axios.get('/product')
-            .then(response => {
-                setProducts(response.data);
-
-                // Extract unique categories from the products
-                const uniqueCategories = [...new Set(response.data.map(product => product.category || "Uncategorized"))];
-                setCategories(uniqueCategories);
-
-                // Set filtered products initially to all products
-                setFilteredProducts(response.data);
-            })
-            .catch(error => console.error('Error fetching products:', error));
-    }, []);
-
-    const filterByCategory = (category) => {
-        setSelectedCategory(category);
-        if (category === '') {
-            setFilteredProducts(products);
-        } else {
-            setFilteredProducts(products.filter(product => product.category === category));
-        }
-    };
-
-    const addToCart = (product) => {
-        // Implement add to cart logic here
-        console.log('Added to cart:', product);
-    };
+    const [category, setCategory] = useState("All");
 
     return (
-        <div className="menu-container">
-            <h2>Our Menu</h2>
+        <div className='explore-menu' id='explore-menu'>
+            <CustomerNavbar /> 
+            <h1>Menu</h1>
+            <p className='explore-menu-text'>
+            Discover our delicious offerings, carefully crafted to satisfy every palate. From savory appetizers to mouth-watering main courses, refreshing beverages, and delightful desserts, explore a variety of dishes that cater to every taste. </p>
 
-            {/* Categories Section */}
-            <div className="categories">
-                <button
-                    key="all"
-                    className={`category-button ${selectedCategory === '' ? 'active' : ''}`}
-                    onClick={() => filterByCategory('')}
-                >
-                    All
-                </button>
-                {categories.map(category => (
-                    <button
-                        key={category}
-                        className={`category-button ${selectedCategory === category ? 'active' : ''}`}
-                        onClick={() => filterByCategory(category)}
-                    >
-                        {category}
-                    </button>
-                ))}
-            </div>
-
-            {/* Products Section */}
-            <div className="products">
-                {filteredProducts.map(product => (
-                    <div key={product.id} className="product-card">
-                        <img src={`./image/${product.imageUrl}`} alt={product.name} className="product-image" />
-                        <h3>{product.name}</h3>
-                        <p>{product.description}</p>
-                        <p>${product.price.toFixed(2)}</p>
-                        <button onClick={() => addToCart(product)} className="add-to-cart-button">
-                            Add to Cart
-                        </button>
+            <div className="explore-menu-list">
+                {menu_list.map((item, index) => (
+                    <div   onClick={() => setCategory(prev => prev === item.menu_name ? "All" : item.menu_name)} key={index} className='explore-menu-list-item'>
+                      <img className={category === item.menu_name ? "active" : ""} src={item.menu_image} alt='' />
+                        <p>{item.menu_name}</p>
                     </div>
                 ))}
             </div>
+            <hr />
+            <GuestFoodDisplay category={category} />
+           
+            <Footer />
         </div>
     );
 };

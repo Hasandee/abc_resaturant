@@ -1,0 +1,40 @@
+.small-button {
+    padding: 10px 10px;
+    font-size: 14px;
+    background-color: #b38b0a;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .small-button:hover {
+    background-color: #8a6908;
+  }
+  .order-management form label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px; /* Increase this value for more spacing */
+  }
+  
+  .order-management form input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 350px;
+  }
+  
+  .order-management form button {
+    padding: 10px 15px;
+    background-color: #b8860b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .order-management form button:hover {
+    background-color: #a3740b;
+  }
+  
+  

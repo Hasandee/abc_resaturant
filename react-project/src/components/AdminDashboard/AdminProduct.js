@@ -1,75 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// src/components/AdminMenu.js
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-const AdminProducts = () => {
-    const [products, setProducts] = useState([]);
-    const [newProduct, setNewProduct] = useState({
-        name: '',
-        description: '',
-        price: '',
-        imageUrl: '',
-        category: ''
+const AdminProduct = () => {
+  const [products, setProducts] = useState([]);
+  const [formState, setFormState] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+    imageUrl: "",
+  });
+
+  useEffect(() => {
+    axios.get("/product").then((response) => {
+      setProducts(response.data);
     });
+  }, []);
 
-    useEffect(() => {
-        axios.get('/product')
-            .then(response => setProducts(response.data))
-            .catch(error => console.error('Error fetching products:', error));
-    }, []);
+  const handleChange = (e) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
 
-    const handleInputChange = (e) => {
-        setNewProduct({
-            ...newProduct,
-            [e.target.name]: e.target.value
-        });
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post("/product", formState).then(() => {
+      // Refresh the product list
+      axios.get("/product").then((response) => {
+        setProducts(response.data);
+      });
+    });
+  };
 
-    const addProduct = () => {
-        axios.post('/product', newProduct)
-            .then(response => {
-                setProducts([...products, response.data]);
-                setNewProduct({
-                    name: '',
-                    description: '',
-                    price: '',
-                    imageUrl: '',
-                    category: ''
-                });
-            })
-            .catch(error => console.error('Error adding product:', error));
-    };
+  const handleDelete = (id) => {
+    axios.delete(`/product/${id}`).then(() => {
+      setProducts(products.filter((product) => product.id !== id));
+    });
+  };
 
-    const deleteProduct = (id) => {
-        axios.delete(`/product/${id}`)
-            .then(() => {
-                setProducts(products.filter(product => product.id !== id));
-            })
-            .catch(error => console.error('Error deleting product:', error));
-    };
+  return (
+    <div>
+      <h1>Admin Menu Management</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="name" value={formState.name} onChange={handleChange} placeholder="Name" required />
+        <input type="text" name="description" value={formState.description} onChange={handleChange} placeholder="Description" required />
+        <input type="number" name="price" value={formState.price} onChange={handleChange} placeholder="Price" required />
+        <input type="text" name="category" value={formState.category} onChange={handleChange} placeholder="Category" required />
+        <input type="text" name="imageUrl" value={formState.imageUrl} onChange={handleChange} placeholder="Image URL" required />
+        <button type="submit">Add Product</button>
+      </form>
 
-    return (
-        <div>
-            <h2>Manage Products</h2>
-            <div>
-                <input type="text" name="name" placeholder="Name" value={newProduct.name} onChange={handleInputChange} />
-                <input type="text" name="description" placeholder="Description" value={newProduct.description} onChange={handleInputChange} />
-                <input type="number" name="price" placeholder="Price" value={newProduct.price} onChange={handleInputChange} />
-                <input type="text" name="imageUrl" placeholder="Image URL" value={newProduct.imageUrl} onChange={handleInputChange} />
-                <input type="text" name="category" placeholder="Category" value={newProduct.category} onChange={handleInputChange} />
-                <button onClick={addProduct}>Add Product</button>
-            </div>
-            <h3>Existing Products</h3>
-            <ul>
-                {products.map(product => (
-                    <li key={product.id}>
-                        {product.name} - {product.category} - ${product.price}
-                        <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                        {/* Edit functionality can be added here */}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+      <div className="menu-list">
+        {products.map((product) => (
+          <div key={product.id} className="menu-item">
+            <img src={product.imageUrl} alt={product.name} />
+            <h2>{product.name}</h2>
+            <p>{product.description}</p>
+            <p>${product.price}</p>
+            <button onClick={() => handleDelete(product.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
-export default AdminProducts;
+export default AdminProduct;

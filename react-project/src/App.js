@@ -28,7 +28,9 @@ import Offers from './pages/Offers';
 import AdminOffers from './components/AdminDashboard/AdminOffers';
 import AdminBranch from './components/AdminDashboard/AdminBranch';
 import Facilities from './components/Facilities/Facilities';
-import AdminCategories from './components/AdminDashboard/AdminCategories';
+import AdminCategory from './components/AdminDashboard/AdminCategory';
+import AdminOrder from './components/AdminDashboard/AdminOrder';
+import StaffOrder from './components/StaffDashboard/StaffOrder';
 
 
 const App = () => {
@@ -79,7 +81,13 @@ const App = () => {
           <Route path="/adminoffers" element={<AdminOffers />} />
           <Route path="/adminbranch" element={<AdminBranch />} />
           <Route path="/facilities" element={<Facilities />} />
-          <Route path="/admincategories" element={<AdminCategories />} />
+          <Route path="/admincategory" element={<AdminCategory />} />
+          <Route path="/adminorder" element={<AdminOrder />} />
+          <Route path="/admin/orders/add" element={<AdminOrder />} />
+        <Route path="/admin/orders/edit/:orderId" element={<AdminOrder />} />
+        <Route path="/stafforder" element={<StaffOrder />} />
+        
+       
         </Routes>
       </div>
     </>

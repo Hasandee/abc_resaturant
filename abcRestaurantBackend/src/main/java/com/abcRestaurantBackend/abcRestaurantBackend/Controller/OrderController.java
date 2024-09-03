@@ -2,7 +2,6 @@ package com.abcRestaurantBackend.abcRestaurantBackend.Controller;
 
 import com.abcRestaurantBackend.abcRestaurantBackend.Model.Order;
 import com.abcRestaurantBackend.abcRestaurantBackend.Service.OrderService;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @RestController
 @RequestMapping("/order")
@@ -24,9 +22,9 @@ public class OrderController {
         return new ResponseEntity<>(orderService.allOrder(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Order>> getSingleOrder(@PathVariable ObjectId id) {
-        return new ResponseEntity<>(orderService.singleOrder(id), HttpStatus.OK);
+    @GetMapping("/{orderId}")
+    public ResponseEntity<Optional<Order>> getSingleOrder(@PathVariable String orderId) {
+        return new ResponseEntity<>(orderService.singleOrder(orderId), HttpStatus.OK);
     }
 
     @PostMapping
@@ -35,16 +33,15 @@ public class OrderController {
         return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable ObjectId id, @RequestBody Order order) {
-        Order updatedOrder = orderService.updateOrder(id, order);
+    @PutMapping("/{orderId}")
+    public ResponseEntity<Order> updateOrder(@PathVariable String orderId, @RequestBody Order order) {
+        Order updatedOrder = orderService.updateOrder(orderId, order);
         return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable ObjectId id) {
-        orderService.deleteOrder(id);
+    @DeleteMapping("/{orderId}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable String orderId) {
+        orderService.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
     }
 }
-

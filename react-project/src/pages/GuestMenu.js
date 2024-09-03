@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Menu.css';
+import './GuestMenu.css';
 import { menu_list } from '../assets/assets';
 import GuestFoodDisplay from '../components/GuestFoodDisplay/GuestFoodDisplay';
 import Footer from '../components/Footer/Footer';

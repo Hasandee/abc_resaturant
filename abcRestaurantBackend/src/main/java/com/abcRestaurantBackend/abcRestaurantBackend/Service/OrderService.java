@@ -1,8 +1,8 @@
 package com.abcRestaurantBackend.abcRestaurantBackend.Service;
+
 import com.abcRestaurantBackend.abcRestaurantBackend.Exception.ResourceNotFoundException;
 import com.abcRestaurantBackend.abcRestaurantBackend.Model.Order;
 import com.abcRestaurantBackend.abcRestaurantBackend.Repository.OrderRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +19,9 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    // Get a single order by id
-    public Optional<Order> singleOrder(ObjectId id) {
-        return orderRepository.findById(id);
+    // Get a single order by orderId
+    public Optional<Order> singleOrder(String orderId) {
+        return orderRepository.findById(orderId);
     }
 
     // Add a new order
@@ -36,21 +36,21 @@ public class OrderService {
         return String.format("O-%03d", count + 1);
     }
 
-    // Update an existing order by id
-    public Order updateOrder(ObjectId id, Order order) {
-        if (!orderRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Order not found with id " + id);
+    // Update an existing order by orderId
+    public Order updateOrder(String orderId, Order order) {
+        if (!orderRepository.existsById(orderId)) {
+            throw new ResourceNotFoundException("Order not found with id " + orderId);
         }
         // Ensure the ID in the request body matches the ID in the URL
-        order.setId(id);
+        order.setOrderId(orderId);
         return orderRepository.save(order);
     }
 
-    // Delete an order by id
-    public void deleteOrder(ObjectId id) {
-        if (!orderRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Order not found with id " + id);
+    // Delete an order by orderId
+    public void deleteOrder(String orderId) {
+        if (!orderRepository.existsById(orderId)) {
+            throw new ResourceNotFoundException("Order not found with id " + orderId);
         }
-        orderRepository.deleteById(id);
+        orderRepository.deleteById(orderId);
     }
 }
