@@ -31,6 +31,10 @@ import Facilities from './components/Facilities/Facilities';
 import AdminCategory from './components/AdminDashboard/AdminCategory';
 import AdminOrder from './components/AdminDashboard/AdminOrder';
 import StaffOrder from './components/StaffDashboard/StaffOrder';
+import Query from './components/Query/Query';
+import StaffQuery from './components/StaffDashboard/StaffQuery';
+import ViewQuery from './components/ViewQuery';
+import AdminQuery from './components/AdminDashboard/AdminQuery';
 
 
 const App = () => {
@@ -47,6 +51,7 @@ const App = () => {
 const isStaffRoute = location.pathname.startsWith('/staffdashboard') || 
                        location.pathname.startsWith('/stafforder') ||
                        location.pathname.startsWith('/staffreservation') ;
+                       location.pathname.startsWith('/staffquery') ;
                     
 
 
@@ -92,6 +97,10 @@ const isStaffRoute = location.pathname.startsWith('/staffdashboard') ||
           <Route path="/admin/orders/add" element={<AdminOrder />} />
         <Route path="/admin/orders/edit/:orderId" element={<AdminOrder />} />
         <Route path="/stafforder" element={<StaffOrder />} />
+        <Route path="/query" element={<Query />} />
+        <Route path="/staffquery" element={<StaffQuery />} />
+        <Route path="/viewquery" element={<ViewQuery />} />
+        <Route path="/adminquery" element={<AdminQuery />} />
         
        
         </Routes>
