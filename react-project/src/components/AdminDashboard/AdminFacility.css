@@ -1,0 +1,112 @@
+/* General container styling */
+.admin-facility-management {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+  }
+  
+  /* Header styling */
+  .admin-facility-management h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+  
+  /* Add Facility section styling */
+  .add-facility, .edit-facility {
+    margin-bottom: 40px;
+  }
+  
+  .add-facility h2, .edit-facility h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  
+  .add-facility input, .add-facility textarea, .edit-facility input, .edit-facility textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .add-facility button, .edit-facility button {
+    padding: 10px 20px;
+    background-color: #a4861e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-facility button:hover, .edit-facility button:hover {
+    background-color: #daa800;
+  }
+  
+  /* Facility List section styling */
+  .facility-list {
+    margin-top: 20px;
+  }
+  
+  .facility-list h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  
+  .facility-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .facility-list li {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .facility-list h3 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+    color: #2c3e50;
+  }
+  
+  .facility-list p {
+    margin: 0 0 10px;
+    font-size: 1em;
+    color: #7f8c8d;
+  }
+  
+  .facility-list img {
+    max-width: 30%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .facility-list button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .facility-list button:hover {
+    opacity: 0.8;
+  }
+  
+  .facility-list .edit-button {
+    background-color: #a4861e;
+    color: white;
+  }
+  
+  .facility-list .delete-button {
+    background-color: #a4861e;
+    color: white;
+  }
+  
