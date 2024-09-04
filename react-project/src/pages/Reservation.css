@@ -109,3 +109,13 @@
 .reservation-form textarea {
     width: calc(100% - 20px);
 }
+
+/* Reservation.css */
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+

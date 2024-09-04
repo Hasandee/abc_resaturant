@@ -1,41 +1,37 @@
 import React, { useState } from 'react';
 import './Reservation.css';
 import CustomerNavbar from '../components/Navbar/CustomerNavbar';
-import ReservationImage from '../utils/img/img17.jpg'; 
+import ReservationImage from '../utils/img/img17.jpg';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+// Validation Schema
+const reservationSchema = yup.object().shape({
+    userName: yup.string().required('User Name is required'),
+    reservationType: yup.string().required('Reservation Type is required'),
+    reservationDate: yup.date().required('Reservation Date is required'),
+    numberOfPeople: yup.number()
+        .positive('Number of People must be positive')
+        .required('Number of People is required'),
+    branch: yup.string().required('Branch is required'),
+    phone: yup.string().required('Phone Number is required'),
+    email: yup.string().email('Invalid email format').required('Email is required'),
+});
 
 const Reservation = () => {
-    const [formData, setFormData] = useState({
-        userName: '',
-        reservationType: '',
-        reservationDate: '',
-        time: '',
-        numberOfPeople: '',
-        specialRequests: '',
-        branch: '',
-        phone: '',
-        email: ''
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: yupResolver(reservationSchema),
     });
 
-    const branches = ['Townhall Branch', 'Rajagiriya Branch', 'Borella Branch'];
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        
+    const onSubmit = async (data) => {
         try {
             const response = await fetch('http://localhost:8080/reservation', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(data),
             });
 
             const responseData = await response.json();
@@ -44,17 +40,7 @@ const Reservation = () => {
 
             if (response.ok) {
                 alert('Reservation successfully added');
-                setFormData({
-                    userName: '',
-                    reservationType: '',
-                    reservationDate: '',
-                    time: '',
-                    numberOfPeople: '',
-                    specialRequests: '',
-                    branch: '',
-                    phone: '',
-                    email: ''
-                });
+                reset();
             } else {
                 alert(`Failed to add reservation: ${responseData.message || 'Unknown error'}`);
             }
@@ -66,105 +52,94 @@ const Reservation = () => {
 
     return (
         <div className="reservation-container">
-            <CustomerNavbar /> 
-            <form className="reservation-form" onSubmit={handleSubmit}>
+            <CustomerNavbar />
+            <form className="reservation-form" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-header">
-                    <img src={ReservationImage} alt="Header" /> {/* Add image URLs */}
+                    <img src={ReservationImage} alt="Header" />
                 </div>
                 <h2>Get Reservation</h2>
-                
+
                 <div className="form-row">
                     <div className="form-group">
                         <label>User Name:</label>
                         <input 
-                            type="text" 
-                            name="userName" 
-                            value={formData.userName} 
-                            onChange={handleChange} 
-                            required 
+                            type="text"
+                            {...register('userName')}
+                            placeholder="Enter Your Name"
                         />
+                        {errors.userName && <p className="error-message">{errors.userName.message}</p>}
                     </div>
                     <div className="form-group">
                         <label>Reservation Type:</label>
                         <input 
-                            type="text" 
-                            name="reservationType" 
-                            value={formData.reservationType} 
-                            onChange={handleChange} 
-                            required 
+                            type="text"
+                            {...register('reservationType')}
+                            placeholder="Enter Reservation Type"
                         />
+                        {errors.reservationType && <p className="error-message">{errors.reservationType.message}</p>}
                     </div>
                 </div>
-                
+
                 <div className="form-row">
                     <div className="form-group">
                         <label>Date:</label>
                         <input 
-                            type="datetime-local" 
-                            name="reservationDate" 
-                            value={formData.reservationDate} 
-                            onChange={handleChange} 
-                            required 
+                            type="datetime-local"
+                            {...register('reservationDate')}
                         />
+                        {errors.reservationDate && <p className="error-message">{errors.reservationDate.message}</p>}
                     </div>
                     <div className="form-group">
                         <label>Number of People:</label>
                         <input 
-                            type="number" 
-                            name="numberOfPeople" 
-                            value={formData.numberOfPeople} 
-                            onChange={handleChange} 
-                            required 
+                            type="number"
+                            {...register('numberOfPeople')}
+                            placeholder="Number of People"
                         />
+                        {errors.numberOfPeople && <p className="error-message">{errors.numberOfPeople.message}</p>}
                     </div>
                 </div>
-                
+
                 <div className="form-row">
                     <div className="form-group">
                         <label>Branch:</label>
                         <select 
-                            name="branch" 
-                            value={formData.branch} 
-                            onChange={handleChange} 
-                            required
+                            {...register('branch')}
                         >
                             <option value="" disabled>Select Branch</option>
-                            {branches.map((branch, index) => (
+                            {['Townhall Branch', 'Rajagiriya Branch', 'Borella Branch'].map((branch, index) => (
                                 <option key={index} value={branch}>
                                     {branch}
                                 </option>
                             ))}
                         </select>
+                        {errors.branch && <p className="error-message">{errors.branch.message}</p>}
                     </div>
                     <div className="form-group">
                         <label>Phone Number:</label>
                         <input 
-                            type="tel" 
-                            name="phone" 
-                            value={formData.phone} 
-                            onChange={handleChange} 
-                            required 
+                            type="tel"
+                            {...register('phone')}
+                            placeholder="Enter Phone Number"
                         />
+                        {errors.phone && <p className="error-message">{errors.phone.message}</p>}
                     </div>
                 </div>
-                
+
                 <div className="form-row">
                     <div className="form-group">
                         <label>Email:</label>
                         <input 
-                            type="email" 
-                            name="email" 
-                            value={formData.email} 
-                            onChange={handleChange} 
-                            required 
+                            type="email"
+                            {...register('email')}
+                            placeholder="Enter Email"
                         />
+                        {errors.email && <p className="error-message">{errors.email.message}</p>}
                     </div>
                     <div className="form-group">
                         <label>Special Requests:</label>
                         <textarea 
-                            name="specialRequests" 
-                            value={formData.specialRequests} 
-                            onChange={handleChange} 
+                            {...register('specialRequests')}
                         />
                     </div>
                 </div>

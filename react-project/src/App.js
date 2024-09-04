@@ -38,6 +38,7 @@ import AdminFacility from './components/AdminDashboard/AdminFacility';
 import Facility from './components/Facilities/Facility';
 
 
+
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
   const location = useLocation();
@@ -105,6 +106,7 @@ const isStaffRoute = location.pathname.startsWith('/staffdashboard') ||
         <Route path="/viewquery" element={<ViewQuery />} />
         <Route path="/adminquery" element={<AdminQuery />} />
         <Route path="/adminfacility" element={<AdminFacility />} />
+        
         
        
         </Routes>
