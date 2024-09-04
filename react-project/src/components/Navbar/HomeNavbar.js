@@ -28,7 +28,7 @@ const HomeNavbar = ({ showNavbar = true, setShowLogin }) => {
             <Link to="/offers" className='nav-link text-uppercase'>Offers</Link>
             <Link to="/about" className='nav-link text-uppercase'>About</Link>
             <Link to="/contact" className='nav-link text-uppercase'>Contact</Link>
-            <Link to="/facilities" className='nav-link text-uppercase'>Facilities</Link>
+            <Link to="/facility" className='nav-link text-uppercase'>Facilities</Link>
            
           </Nav>
           <Nav>

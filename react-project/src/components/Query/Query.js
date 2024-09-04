@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Query.css';
+import CustomerNavbar from '../Navbar/CustomerNavbar';
 
 const Query = ({ userId }) => {
     const [queryDate, setQueryDate] = useState('');
@@ -31,6 +32,7 @@ const Query = ({ userId }) => {
 
     return (
         <div className="query-form">
+              <CustomerNavbar />
             <h2><b>Submit Your Query</b></h2>
             {successMessage && <p>{successMessage}</p>}
             <form onSubmit={handleSubmit}>

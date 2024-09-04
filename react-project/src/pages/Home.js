@@ -50,15 +50,15 @@ function Home() {
               <ul className='px-0'>
                 <li className='d-flex justify-content-between'>
                   <p className='fs-3 mx-2'>EGrilled Sandwich</p>
-                  <p className='fs-3 mx-2 text-success fw-bold'>£16</p>
+                  <p className='fs-3 mx-2 text-success fw-bold'>Rs.260</p>
                 </li>
                 <li className='d-flex justify-content-between'>
                   <p className='fs-3 mx-2'>Buttter Noodles</p>
-                  <p className='fs-3 mx-2 text-success fw-bold'>£14</p>
+                  <p className='fs-3 mx-2 text-success fw-bold'>Rs.340</p>
                 </li>
                 <li className='d-flex justify-content-between'>
                   <p className='fs-3 mx-2'>Peri Peri Rolls</p>
-                  <p className='fs-3 mx-2 text-success fw-bold'>£12</p>
+                  <p className='fs-3 mx-2 text-success fw-bold'>Rs.120</p>
                 </li>
               </ul>
             </div>
@@ -67,15 +67,15 @@ function Home() {
               <ul className='px-0'>
                 <li className='d-flex justify-content-between'>
                   <p className='fs-3 mx-2'>Fruit Ice Cream</p>
-                  <p className='fs-3 mx-2 text-success fw-bold'>£22</p>
+                  <p className='fs-3 mx-2 text-success fw-bold'>Rs.220</p>
                 </li>
                 <li className='d-flex justify-content-between'>
                   <p className='fs-3 mx-2'>Jar Ice Cream</p>
-                  <p className='fs-3 mx-2 text-success fw-bold'>£22</p>
+                  <p className='fs-3 mx-2 text-success fw-bold'>Rs.220</p>
                 </li>
                 <li className='d-flex justify-content-between'>
                   <p className='fs-3 mx-2'>Butterscotch Cake</p>
-                  <p className='fs-3 mx-2 text-success fw-bold'>£20</p>
+                  <p className='fs-3 mx-2 text-success fw-bold'>Rs.200</p>
                 </li>
               </ul>
             </div>

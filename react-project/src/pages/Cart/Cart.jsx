@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import './Cart.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
+import CustomerNavbar from  '../../components/Navbar/CustomerNavbar';
 
 const Cart = () => {
   const { cartItems, food_list, removeFromCart, getTotalCartAmount } = useContext(StoreContext); 
 const navigate = useNavigate();
   return (
     <div className='cart'>
+      <CustomerNavbar />
       <div className='cart-items'>
         <div className='cart-items-title'>
           <p>Items</p>
@@ -26,9 +28,9 @@ const navigate = useNavigate();
                 <div className='cart-items-title cart-items-item'>
                   <img src={item.image} alt="" />
                   <p>{item.name}</p>
-                  <p>${item.price}</p>
+                  <p>Rs.{item.price}</p>
                   <p>{cartItems[item._id]}</p>
-                  <p>${item.price * cartItems[item._id]}</p>
+                  <p>Rs.{item.price * cartItems[item._id]}</p>
                   <p 
                     className="remove-button" 
                     onClick={() => removeFromCart(item._id)}>
@@ -49,17 +51,17 @@ const navigate = useNavigate();
           <div>
             <div className="cart-total-details">
               <p>SubTotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>Rs.{getTotalCartAmount()}</p>
             </div>
             <hr />
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>$2</p> 
+              <p>Rs.200</p> 
             </div>
             <hr />
             <div className="cart-total-details">
               <b>Total</b>
-              <b>${getTotalCartAmount() + 2}</b> 
+              <b>Rs.{getTotalCartAmount() + 200}</b> 
             </div>
           </div>
           <button onClick={()=>navigate('/order')}>Proceed to Checkout</button>
