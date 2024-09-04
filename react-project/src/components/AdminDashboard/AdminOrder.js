@@ -205,7 +205,7 @@ const AdminOrder = () => {
               <tr key={order.orderId}>
                 <td>{order.orderId}</td>
                 <td>{order.userId}</td>
-                <td>${order.totalPrice}</td>
+                <td>Rs.{order.totalPrice}</td>
                 <td>{order.status}</td>
                 <td>{order.deliveryAddress}</td>
                 <td>{order.paymentMethod}</td>

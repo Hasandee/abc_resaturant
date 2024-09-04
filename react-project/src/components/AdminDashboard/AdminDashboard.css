@@ -8,9 +8,10 @@
   flex-grow: 1;
   padding: 20px;
   padding-top: 60px;
-  background-image: url('../img/img1.jpg'); /* Replace with your image path */
+  background-image: url('../img/img4.jpg'); /* Replace with your image path */
+  filter: blur(3px);
   background-size: cover; /* Cover the entire content area */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Prevent image repetition */
-  height: 185%; /* Match the height of the parent flex container */
+  height: 165%; /* Match the height of the parent flex container */
 }

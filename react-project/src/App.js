@@ -47,7 +47,9 @@ const App = () => {
                        location.pathname.startsWith('/admingallery') ||
                        location.pathname.startsWith('/adminreservation') ||
                        location.pathname.startsWith('/adminuser') ||
-                       location.pathname.startsWith('/adminfeedback');
+                       location.pathname.startsWith('/adminfeedback') ||
+                       location.pathname.startsWith('/adminorder') ||
+                       location.pathname.startsWith('/adminquery');
 
 const isStaffRoute = location.pathname.startsWith('/staffdashboard') || 
                        location.pathname.startsWith('/stafforder') ||
