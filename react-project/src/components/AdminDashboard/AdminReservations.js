@@ -1,73 +1,89 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 import './AdminReservations.css';
-
 
 const AdminReservations = () => {
     const [reservations, setReservations] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         fetchReservations();
     }, []);
 
-    const fetchReservations = async () => {
-        try {
-            const response = await axios.get('http://localhost:8080/reservation');
-            console.log(response.data);  // Check if all fields are being fetched correctly
-            setReservations(response.data);
-        } catch (error) {
-            console.error('Failed to fetch reservations:', error);
-        }
+    const fetchReservations = () => {
+        axios.get('/reservation')
+            .then(response => {
+                const sortedReservations = response.data.sort((a, b) => new Date(b.reservationDate) - new Date(a.reservationDate));
+                setReservations(sortedReservations);
+            })
+            .catch(error => console.error('Error fetching reservations:', error));
     };
 
-    const handleExportPDF = () => {
-        const doc = new jsPDF();
-        autoTable(doc, { html: '#reservation-table' });
-        doc.save('reservations.pdf');
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString(undefined, options);
     };
+
+    const formatTime = (dateString) => {
+        const options = { hour: '2-digit', minute: '2-digit' };
+        const date = new Date(dateString);
+        return date.toLocaleTimeString(undefined, options);
+    };
+
+    const filteredReservations = reservations.filter(reservation =>
+        reservation.userName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        reservation.phone.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        reservation.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        reservation.reservationDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        reservation.status.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
-        <div>
-          
-            <h1>Admin Reservations</h1>
-            <button onClick={handleExportPDF}>Generate PDF</button>
-            <div className="table-container">
-                <table id="reservation-table">
-                    <thead>
-                        <tr>
-                            <th>Reservation ID</th>
-                            <th>User Name</th>
-                            <th>Reservation Type</th>
-                            <th>Reservation Date</th>
-                            <th>Branch</th>
-                            <th>Number of People</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Special Requests</th>
+        <div className="admin-reservations-container">
+            <h1>View Reservations</h1>
+            <p>As an admin, you can view all reservations made by customers at ABC Restaurant. This interface provides an overview of reservation details to assist with management and operations.</p>
+
+            <input
+                type="text"
+                placeholder="Search by name, phone, email, date, or status"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+            />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Guests</th>
+                        <th>Branch</th>
+                        <th>Table No</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {filteredReservations.map((reservation) => (
+                        <tr key={reservation.reservationId}>
+                            <td>{reservation.userName}</td>
+                            <td>{reservation.phone}</td>
+                            <td>{reservation.email}</td>
+                            <td>{formatDate(reservation.reservationDate)}</td>
+                            <td>{formatTime(reservation.reservationDate)}</td>
+                            <td>{reservation.numberOfPeople}</td>
+                            <td>{reservation.branch}</td>
+                            <td>{reservation.tableNo}</td>
+                            <td>{reservation.status}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        {reservations.map((reservation) => (
-                            <tr key={reservation.reservationId}>
-                                <td>{reservation.reservationId}</td>
-                                <td>{reservation.userName}</td>
-                                <td>{reservation.reservationType}</td>
-                                <td>{reservation.reservationDate}</td>
-                                <td>{reservation.branch}</td>
-                                <td>{reservation.numberOfPeople}</td>
-                                <td>{reservation.phone}</td>
-                                <td>{reservation.email}</td>
-                                <td>{reservation.specialRequests}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
-    
 };
 
 export default AdminReservations;

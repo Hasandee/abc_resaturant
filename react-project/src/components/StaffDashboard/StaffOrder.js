@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../AdminDashboard/AdminOrder.css';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
 
 const StaffOrder = () => {
   const { orderId } = useParams();
@@ -93,17 +91,13 @@ const StaffOrder = () => {
         alert('Failed to delete the order.');
       });
   };
-  const handleExportPDF = () => {
-    const doc = new jsPDF();
-    autoTable(doc, { html: '#order-table' });
-    doc.save('orders.pdf');
-};
+  
 
 
   return (
     <div className="order-management">
       <h1>Order Management</h1>
-      <button onClick={handleExportPDF}>Generate PDF</button>
+      
 
       {/* Toggle Button to Show Add Order Form */}
       <div className="order-management-section">

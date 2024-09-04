@@ -51,5 +51,6 @@ public class ReservationService {
             throw new ResourceNotFoundException("Reservation not found with id " + reservationId);
         }
         reservationRepository.delete(reservation);
+
     }
 }

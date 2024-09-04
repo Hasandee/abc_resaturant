@@ -23,4 +23,5 @@ public class Reservation {
     private String status;
     private String phone;
     private String email;
+    private Integer tableNo;
 }
