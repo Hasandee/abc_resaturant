@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Order {
     @Id
-    private String orderId;  // Changed from ObjectId to String
+    private String orderId;
     private String userId;
     private List<String> productIds;
     private String orderDate;

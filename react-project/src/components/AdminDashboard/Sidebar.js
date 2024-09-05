@@ -62,6 +62,11 @@ const Sidebar = () => {
         </li>
         </li>
         <li>
+          <NavLink to="/adminbranch" className="sidebar-link" activeClassName="active-link">
+            Branches
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/adminquery" className="sidebar-link" activeClassName="active-link">
             Queries
           </NavLink>

@@ -13,5 +13,5 @@
   background-size: cover; /* Cover the entire content area */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Prevent image repetition */
-  height: 165%; /* Match the height of the parent flex container */
+  height: 190%; /* Match the height of the parent flex container */
 }

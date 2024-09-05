@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './AdminReservations.css';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
+
 
 const AdminReservations = () => {
     const [reservations, setReservations] = useState([]);
@@ -38,12 +41,17 @@ const AdminReservations = () => {
         reservation.reservationDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
         reservation.status.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    const handleExportPDF = () => {
+        const doc = new jsPDF();
+        autoTable(doc, { html: '#reservation-table' });
+        doc.save('reservations.pdf');
+    };
 
     return (
         <div className="admin-reservations-container">
+              <button onClick={handleExportPDF}>Generate PDF</button>
             <h1>View Reservations</h1>
-            <p>As an admin, you can view all reservations made by customers at ABC Restaurant. This interface provides an overview of reservation details to assist with management and operations.</p>
-
+            
             <input
                 type="text"
                 placeholder="Search by name, phone, email, date, or status"
@@ -52,7 +60,7 @@ const AdminReservations = () => {
                 className="search-input"
             />
 
-            <table>
+<table id="reservation-table">
                 <thead>
                     <tr>
                         <th>Name</th>

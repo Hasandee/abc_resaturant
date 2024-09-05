@@ -50,7 +50,8 @@ const App = () => {
                        location.pathname.startsWith('/adminuser') ||
                        location.pathname.startsWith('/adminfeedback') ||
                        location.pathname.startsWith('/adminorder') ||
-                       location.pathname.startsWith('/adminquery');
+                       location.pathname.startsWith('/adminquery') ||
+                       location.pathname.startsWith('/adminbranch');
 
 const isStaffRoute = location.pathname.startsWith('/staffdashboard') || 
                        location.pathname.startsWith('/stafforder') ||

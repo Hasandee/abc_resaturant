@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 public class Feedback {
     @Id
+    private  ObjectId id;
     private String feedbackId;
     private String userId; // ID of the user who provided the feedback
     private String message;

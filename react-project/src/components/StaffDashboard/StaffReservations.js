@@ -116,8 +116,6 @@ const StaffReservation = () => {
     return (
         <div className="staff-table-container">
             <h1>Manage Reservations</h1>
-            <p>At ABC Restaurant, our staff can efficiently manage reservations using a user-friendly system. The system simplifies reservation management, ensures smooth operations, and enhances our guests' dining experience.</p>
-
             <button className="add-reservation-button" onClick={handleAddNewReservation}>
                 Add New Reservation
             </button>
@@ -273,14 +271,8 @@ const StaffReservation = () => {
                         <input
                             type="date"
                             name="reservationDate"
-                            value={newReservationData.reservationDate.split('T')[0]}
+                            value={newReservationData.reservationDate}
                             onChange={(e) => setNewReservationData({ ...newReservationData, reservationDate: e.target.value })}
-                        />
-                        <input
-                            type="time"
-                            name="reservationType"
-                            value={newReservationData.reservationDate.split('T')[1].slice(0, 5)}
-                            onChange={(e) => setNewReservationData({ ...newReservationData, reservationDate: `${newReservationData.reservationDate.split('T')[0]}T${e.target.value}:00` })}
                         />
                         <input
                             type="number"
