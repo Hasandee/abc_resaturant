@@ -67,6 +67,11 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/adminoffers" className="sidebar-link" activeClassName="active-link">
+            Offers
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/adminquery" className="sidebar-link" activeClassName="active-link">
             Queries
           </NavLink>

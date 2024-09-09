@@ -17,39 +17,59 @@ public class ProductService {
 
     // Get all products
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        try {
+            return productRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving products", e);
+        }
     }
 
     // Get product by ID
     public Product getProductById(String id) {
-        Optional<Product> product = productRepository.findById(id);
-        return product.orElse(null);
+        try {
+            Optional<Product> product = productRepository.findById(id);
+            return product.orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving product with id: " + id, e);
+        }
     }
 
     // Save a new product
     public Product saveProduct(Product product) {
-        return productRepository.save(product);
+        try {
+            return productRepository.save(product);
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving product", e);
+        }
     }
 
     // Update an existing product
     public Product updateProduct(String id, Product updatedProduct) {
-        Optional<Product> existingProduct = productRepository.findById(id);
+        try {
+            Optional<Product> existingProduct = productRepository.findById(id);
 
-        if (existingProduct.isPresent()) {
-            Product product = existingProduct.get();
-            product.setName(updatedProduct.getName());
-            product.setDescription(updatedProduct.getDescription());
-            product.setPrice(updatedProduct.getPrice());
-            product.setImageUrl(updatedProduct.getImageUrl());
-            product.setCategory(updatedProduct.getCategory());
-            return productRepository.save(product);
+            if (existingProduct.isPresent()) {
+                Product product = existingProduct.get();
+                product.setName(updatedProduct.getName());
+                product.setDescription(updatedProduct.getDescription());
+                product.setPrice(updatedProduct.getPrice());
+                product.setImageUrl(updatedProduct.getImageUrl());
+                product.setCategory(updatedProduct.getCategory());
+                return productRepository.save(product);
+            } else {
+                throw new ResourceNotFoundException("Product not found with id: " + id);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating product with id: " + id, e);
         }
-
-        return null; // Or throw an exception if you prefer
     }
 
     // Delete a product
     public void deleteProduct(String id) {
-        productRepository.deleteById(id);
+        try {
+            productRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting product with id: " + id, e);
+        }
     }
 }

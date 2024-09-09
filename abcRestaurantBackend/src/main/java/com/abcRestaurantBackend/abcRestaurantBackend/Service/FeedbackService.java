@@ -16,41 +16,68 @@ public class FeedbackService {
 
     // Get all feedback
     public List<Feedback> allFeedback() {
-        return feedbackRepository.findAll();
+        try {
+            return feedbackRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching feedback list", e);
+        }
     }
 
     // Get a single feedback by feedbackId
     public Optional<Feedback> singleFeedback(String feedbackId) {
-        return feedbackRepository.findByFeedbackId(feedbackId);
+        try {
+            return feedbackRepository.findByFeedbackId(feedbackId);
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching feedback with id " + feedbackId, e);
+        }
     }
 
     // Add a new feedback
     public Feedback addFeedback(Feedback feedback) {
-        feedback.setFeedbackId(generateFeedbackId());
-        return feedbackRepository.save(feedback);
+        try {
+            feedback.setFeedbackId(generateFeedbackId());
+            return feedbackRepository.save(feedback);
+        } catch (Exception e) {
+            throw new RuntimeException("Error adding new feedback", e);
+        }
     }
 
     // Generate a new feedback ID
     private String generateFeedbackId() {
-        long count = feedbackRepository.count();
-        return String.format("F-%03d", count + 1);
+        try {
+            long count = feedbackRepository.count();
+            return String.format("F-%03d", count + 1);
+        } catch (Exception e) {
+            throw new RuntimeException("Error generating feedback ID", e);
+        }
     }
 
     // Update an existing feedback by feedbackId
     public Feedback updateFeedback(String feedbackId, Feedback feedback) {
-        if (!feedbackRepository.existsByFeedbackId(feedbackId)) {
-            throw new ResourceNotFoundException("Feedback not found with id " + feedbackId);
+        try {
+            if (!feedbackRepository.existsByFeedbackId(feedbackId)) {
+                throw new ResourceNotFoundException("Feedback not found with id " + feedbackId);
+            }
+            feedback.setFeedbackId(feedbackId);  // Ensure feedbackId in the request matches the URL feedbackId
+            return feedbackRepository.save(feedback);
+        } catch (ResourceNotFoundException e) {
+            throw e;  // Re-throw custom exceptions
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating feedback with id " + feedbackId, e);
         }
-        // Ensure the feedbackId in the request body matches the feedbackId in the URL
-        feedback.setFeedbackId(feedbackId);
-        return feedbackRepository.save(feedback);
     }
 
     // Delete a feedback by feedbackId
     public void deleteFeedback(String feedbackId) {
-        if (!feedbackRepository.existsByFeedbackId(feedbackId)) {
-            throw new ResourceNotFoundException("Feedback not found with id " + feedbackId);
+        try {
+            if (!feedbackRepository.existsByFeedbackId(feedbackId)) {
+                throw new ResourceNotFoundException("Feedback not found with id " + feedbackId);
+            }
+            feedbackRepository.deleteByFeedbackId(feedbackId);
+        } catch (ResourceNotFoundException e) {
+            throw e;  // Re-throw custom exceptions
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting feedback with id " + feedbackId, e);
         }
-        feedbackRepository.deleteByFeedbackId(feedbackId);
     }
 }

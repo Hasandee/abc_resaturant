@@ -99,10 +99,12 @@
 			<version>5.10.3</version>
 			<scope>test</scope>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-bom</artifactId>
-			<version>4.19.1</version>
+			<artifactId>selenium-java</artifactId>
+			<version>4.24.0</version>
 		</dependency>
 
 	</dependencies>

@@ -25,6 +25,8 @@ const Reservation = () => {
     });
 
     const onSubmit = async (data) => {
+        console.log(data);
+        
         try {
             const response = await fetch('http://localhost:8080/reservation', {
                 method: 'POST',
@@ -39,7 +41,9 @@ const Reservation = () => {
             console.log('Response Data:', responseData);
 
             if (response.ok) {
-                alert('Reservation successfully added');
+                alert('Reservation successfully added')
+                ;
+
                 reset();
             } else {
                 alert(`Failed to add reservation: ${responseData.message || 'Unknown error'}`);
@@ -63,6 +67,7 @@ const Reservation = () => {
                     <div className="form-group">
                         <label>User Name:</label>
                         <input 
+                        id='name'
                             type="text"
                             {...register('userName')}
                             placeholder="Enter Your Name"
@@ -72,6 +77,7 @@ const Reservation = () => {
                     <div className="form-group">
                         <label>Reservation Type:</label>
                         <input 
+                        id='type'
                             type="text"
                             {...register('reservationType')}
                             placeholder="Enter Reservation Type"
@@ -84,6 +90,7 @@ const Reservation = () => {
                     <div className="form-group">
                         <label>Date:</label>
                         <input 
+                        id='date'
                             type="datetime-local"
                             {...register('reservationDate')}
                         />
@@ -92,6 +99,7 @@ const Reservation = () => {
                     <div className="form-group">
                         <label>Number of People:</label>
                         <input 
+                        id='peopleno'
                             type="number"
                             {...register('numberOfPeople')}
                             placeholder="Number of People"
@@ -103,8 +111,10 @@ const Reservation = () => {
                 <div className="form-row">
                     <div className="form-group">
                         <label>Branch:</label>
+                        
                         <select 
                             {...register('branch')}
+                            id='branch'
                         >
                             <option value="" disabled>Select Branch</option>
                             {['Townhall Branch', 'Rajagiriya Branch', 'Borella Branch'].map((branch, index) => (
@@ -118,6 +128,7 @@ const Reservation = () => {
                     <div className="form-group">
                         <label>Phone Number:</label>
                         <input 
+                        id='phone'
                             type="tel"
                             {...register('phone')}
                             placeholder="Enter Phone Number"
@@ -130,6 +141,7 @@ const Reservation = () => {
                     <div className="form-group">
                         <label>Email:</label>
                         <input 
+                        id='email'
                             type="email"
                             {...register('email')}
                             placeholder="Enter Email"
@@ -138,13 +150,15 @@ const Reservation = () => {
                     </div>
                     <div className="form-group">
                         <label>Special Requests:</label>
+                        
                         <textarea 
+                        id='requests'
                             {...register('specialRequests')}
                         />
                     </div>
                 </div>
 
-                <button type="submit">Submit Reservation</button>
+                <button type="submit" id='submit'>Submit Reservation</button>
             </form>
         </div>
     );

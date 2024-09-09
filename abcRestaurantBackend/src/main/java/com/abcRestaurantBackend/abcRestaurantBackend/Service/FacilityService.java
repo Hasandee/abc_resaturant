@@ -15,27 +15,49 @@ public class FacilityService {
     private FacilityRepository facilityRepository;
 
     public List<Facility> getAllFacilities() {
-        return facilityRepository.findAll();
+        try {
+            return facilityRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching facilities", e);
+        }
     }
 
     public Optional<Facility> getFacilityById(String id) {
-        return facilityRepository.findById(id);
+        try {
+            return facilityRepository.findById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error fetching facility by ID: " + id, e);
+        }
     }
 
     public Facility addFacility(Facility facility) {
-        return facilityRepository.save(facility);
+        try {
+            return facilityRepository.save(facility);
+        } catch (Exception e) {
+            throw new RuntimeException("Error adding facility", e);
+        }
     }
 
     public Facility updateFacility(String id, Facility facilityDetails) {
-        Facility facility = facilityRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid facility Id: " + id));
-        facility.setHeading(facilityDetails.getHeading());
-        facility.setDescription(facilityDetails.getDescription());
-        facility.setImage(facilityDetails.getImage());
-        return facilityRepository.save(facility);
+        try {
+            Facility facility = facilityRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid facility Id: " + id));
+            facility.setHeading(facilityDetails.getHeading());
+            facility.setDescription(facilityDetails.getDescription());
+            facility.setImage(facilityDetails.getImage());
+            return facilityRepository.save(facility);
+        } catch (IllegalArgumentException e) {
+            throw e; // This will be caught in the controller
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating facility", e);
+        }
     }
 
     public void deleteFacility(String id) {
-        facilityRepository.deleteById(id);
+        try {
+            facilityRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting facility with ID: " + id, e);
+        }
     }
 }

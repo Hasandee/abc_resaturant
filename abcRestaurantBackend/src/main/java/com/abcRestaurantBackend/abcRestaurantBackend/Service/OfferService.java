@@ -17,18 +17,31 @@ public class OfferService {
 
     // Get all offers
     public List<Offer> allOffer() {
-        return offerRepository.findAll();
+        try {
+            return offerRepository.findAll();
+        } catch (Exception e) {
+            // Handle exception (log it, rethrow it, etc.)
+            throw new RuntimeException("Error retrieving offers", e);
+        }
     }
 
     // Get a single offer by offerId
     public Optional<Offer> singleOffer(String offerId) {
-        return offerRepository.findByOfferId(offerId);
+        try {
+            return offerRepository.findByOfferId(offerId);
+        } catch (Exception e) {
+            throw new RuntimeException("Error retrieving offer with id " + offerId, e);
+        }
     }
 
     // Add a new offer
     public Offer addOffer(Offer offer) {
-        offer.setOfferId(generateOfferId());
-        return offerRepository.save(offer);
+        try {
+            offer.setOfferId(generateOfferId());
+            return offerRepository.save(offer);
+        } catch (Exception e) {
+            throw new RuntimeException("Error saving offer", e);
+        }
     }
 
     // Generate a new offer ID
@@ -39,21 +52,32 @@ public class OfferService {
 
     // Update an existing offer by offerId
     public Offer updateOffer(String offerId, Offer offer) {
-        Optional<Offer> existingOffer = offerRepository.findByOfferId(offerId);
-        if (!existingOffer.isPresent()) {
-            throw new ResourceNotFoundException("Offer not found with id " + offerId);
+        try {
+            Optional<Offer> existingOffer = offerRepository.findByOfferId(offerId);
+            if (!existingOffer.isPresent()) {
+                throw new ResourceNotFoundException("Offer not found with id " + offerId);
+            }
+            offer.setOfferId(offerId);
+            return offerRepository.save(offer);
+        } catch (ResourceNotFoundException e) {
+            throw e; // Rethrow the custom exception
+        } catch (Exception e) {
+            throw new RuntimeException("Error updating offer", e);
         }
-        // Ensure the offerId in the request body matches the offerId in the URL
-        offer.setOfferId(offerId);
-        return offerRepository.save(offer);
     }
 
     // Delete an offer by offerId
     public void deleteOffer(String offerId) {
-        Optional<Offer> existingOffer = offerRepository.findByOfferId(offerId);
-        if (!existingOffer.isPresent()) {
-            throw new ResourceNotFoundException("Offer not found with id " + offerId);
+        try {
+            Optional<Offer> existingOffer = offerRepository.findByOfferId(offerId);
+            if (!existingOffer.isPresent()) {
+                throw new ResourceNotFoundException("Offer not found with id " + offerId);
+            }
+            offerRepository.delete(existingOffer.get());
+        } catch (ResourceNotFoundException e) {
+            throw e; // Rethrow the custom exception
+        } catch (Exception e) {
+            throw new RuntimeException("Error deleting offer", e);
         }
-        offerRepository.delete(existingOffer.get());
     }
 }
