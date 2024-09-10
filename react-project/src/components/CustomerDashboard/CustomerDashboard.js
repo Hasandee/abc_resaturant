@@ -1,12 +1,12 @@
-// src/pages/Home.js
+
 import React from 'react';
 import './CustomerDashboard.css';
-import CustomerNavbar from '../Navbar/CustomerNavbar'; // Only import CustomerNavbar
+import CustomerNavbar from '../Navbar/CustomerNavbar'; 
 
 function Home() {
   return (
     <div className='customerhome-page'>
-      <CustomerNavbar /> {/* Only CustomerNavbar should be here */}
+      <CustomerNavbar /> 
       <header className='h-100 min-vh-100 d-flex align-items-center text-light shadow'>
         <div className='container'>
           <div className='row'>

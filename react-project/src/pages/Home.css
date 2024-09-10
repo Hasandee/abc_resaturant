@@ -81,7 +81,6 @@ img {
     border-color: #daa800 !important; 
 }
 
-/* Ensure other content is not overlapped */
 .home-page .container {
     position: relative;
     z-index: 2;

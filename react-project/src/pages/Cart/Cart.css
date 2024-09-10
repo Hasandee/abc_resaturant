@@ -51,7 +51,7 @@
     display: flex;
     justify-content: space-between;
     color: #555;
-    gap: 90px; /* Increase this value to create more space */
+    gap: 90px; 
 }
 
 .cart-total hr{

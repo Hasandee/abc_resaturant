@@ -38,7 +38,7 @@ const AdminOrder = () => {
       <h1>Order Management</h1>
       <button onClick={handleExportPDF}>Generate PDF</button>
 
-      {/* Order List Section */}
+      
       <div className="order-management-section">
         <h2>Order List</h2>
         <table id="order-table">

@@ -2,13 +2,13 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-top: 100px; /* Adjust this value if needed */
+    padding-top: 100px; 
 }
 
 .explore-menu h1 {
     color: #262626;
     font-weight: 500;
-    text-align: center; /* Optional: Center the text */
+    text-align: center; 
 }
 
 .explore-menu-text {

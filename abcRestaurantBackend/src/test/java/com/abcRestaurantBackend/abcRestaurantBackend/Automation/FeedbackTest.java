@@ -31,32 +31,41 @@ public class FeedbackTest {
 
     @Test
     public void testFeedbackForm() throws InterruptedException {
-        // Fill in the user ID
+
         driver.findElement(By.id("userId")).sendKeys("12345");
 
-        // Fill in the message
+
         driver.findElement(By.id("message")).sendKeys("Great service!");
 
-        // Select a rating
+
         WebElement ratingDropdown = driver.findElement(By.id("rating"));
         Select selectRating = new Select(ratingDropdown);
         selectRating.selectByValue("5"); // Choose a rating between 1 and 5
 
-        // Submit the form
+
         driver.findElement(By.cssSelector("button[type='submit']")).click();
 
-        // Wait for confirmation alert and validate it
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
 
-// Get the text from the alert
+
         String alertText = alert.getText();
 
-// Assert that the alert text is correct
+
         assertEquals("Thank you for your feedback!", alertText);
 
-// Accept the alert
+
         alert.accept();
+        Thread.sleep(3000);
+    }
+
+    @Test
+    public void testFeedbackWithoutForm() throws InterruptedException {
+
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Thread.sleep(3000);
     }
 
     @AfterEach

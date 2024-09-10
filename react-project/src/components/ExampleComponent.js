@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Make sure Bootstrap is installed
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 function ExampleComponent() {
   const [data, setData] = useState(null);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Offers.css'; // Make sure to import the CSS file
+import './Offers.css'; 
 import OfferImage from '../utils/img/img15.jpg'; 
 
 

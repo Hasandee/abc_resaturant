@@ -1,38 +1,38 @@
-/* src/components/Navbar/CustomerNavbar.css */
+
 
 .bg-body-primary {
-    background-color: #f8f9fa; /* Light background color */
+    background-color: #f8f9fa; 
   }
   
   .navbar-brand {
     font-size: 1.5rem;
-    color: #28a745; /* Bootstrap's green color for brand */
+    color: #28a745; 
   }
   
   .navbar-brand:hover {
-    color: #218838; /* Slightly darker green on hover */
+    color: #218838; 
   }
   
   .nav-link {
     font-size: 1rem;
-    color: #212529; /* Darker text color for links */
-    padding: 0.5rem 1rem; /* Add padding around links */
+    color: #212529; 
+    padding: 0.5rem 1rem; 
   }
   
   .nav-link:hover {
-    color: #007bff; /* Change link color on hover */
+    color: #007bff; 
   }
   
   .nav-link.active {
     font-weight: bold;
-    color: #007bff; /* Bootstrap's primary color for active links */
+    color: #007bff; 
   }
   
   .navbar-toggler {
-    border-color: #007bff; /* Change the color of the toggle button border */
+    border-color: #007bff; 
   }
   
   .navbar-toggler-icon {
-    background-image: url('data:image/svg+xml,...'); /* Bootstrap’s default icon */
+    background-image: url('data:image/svg+xml,...'); 
   }
   

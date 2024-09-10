@@ -58,7 +58,7 @@ const StaffOrder = () => {
       .then(response => {
         alert('Order added successfully!');
         setShowAddOrder(false);
-        setOrders([...orders, response.data]); // Update orders list
+        setOrders([...orders, response.data]); 
       })
       .catch(error => {
         console.error(error);
@@ -68,11 +68,11 @@ const StaffOrder = () => {
 
   const handleUpdateOrder = (e) => {
     e.preventDefault();
-    axios.put(`/order/${selectedOrder.orderId}`, selectedOrder)  // Use selectedOrder.orderId here
+    axios.put(`/order/${selectedOrder.orderId}`, selectedOrder)  
       .then(response => {
         alert('Order updated successfully!');
-        setOrders(orders.map(order => order.orderId === selectedOrder.orderId ? response.data : order)); // Update orders list
-        setSelectedOrder(null); // Clear the selected order
+        setOrders(orders.map(order => order.orderId === selectedOrder.orderId ? response.data : order)); 
+        setSelectedOrder(null); 
       })
       .catch(error => {
         console.error(error);

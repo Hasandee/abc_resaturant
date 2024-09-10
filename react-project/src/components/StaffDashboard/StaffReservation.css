@@ -1,4 +1,4 @@
-/* Overall container styling */
+
 .admin-reservations {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0 auto;
@@ -11,7 +11,7 @@
     background-color: #e7d390;
 }
 
-/* Main heading */
+
 .admin-reservations h2 {
     text-align: center;
     color: #333;
@@ -19,7 +19,7 @@
     font-size: 2rem;
 }
 
-/* Form container */
+
 .reservation-form {
     margin-bottom: 30px;
     padding: 20px;
@@ -28,14 +28,14 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Form heading */
+
 .reservation-form h3 {
     margin-bottom: 20px;
     color: #555;
     font-size: 1.5rem;
 }
 
-/* Form input styling */
+
 .reservation-form input {
     display: block;
     width: 100%;
@@ -47,7 +47,6 @@
     box-sizing: border-box;
 }
 
-/* Button styling */
 .reservation-form button {
     padding: 8px 10px;
     margin-top: 10px;
@@ -64,9 +63,8 @@
     background-color: #daa800;
 }
 
-/* Table styling */
 .table-container {
-    overflow-x: auto; /* Allows horizontal scroll if needed */
+    overflow-x: auto; 
 }
 
 table {
@@ -128,7 +126,7 @@ table button.delete-button:hover {
     background-color: #c82333;
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
     .reservation-form input, .reservation-form button {
         font-size: 0.8rem;

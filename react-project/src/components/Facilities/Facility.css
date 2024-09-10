@@ -1,11 +1,11 @@
-/* General container styling */
+
 .facility-container {
     font-family: Arial, sans-serif;
     color: #333;
     padding: 20px;
   }
   
-  /* Header styling */
+  
   .facility-header {
     text-align: center;
     margin-bottom: 40px;
@@ -24,7 +24,7 @@
     margin: 0 auto;
   }
   
-  /* Gallery section styling */
+
   .facility-gallery {
     display: flex;
     flex-wrap: wrap;
@@ -73,7 +73,7 @@
     color: #7f8c8d;
   }
   
-  /* Features section styling */
+  
   .facility-features {
     margin: 40px 0;
     text-align: center;
@@ -97,7 +97,7 @@
     color: #7f8c8d;
   }
   
-  /* Footer styling */
+  
   .about-footer {
     text-align: center;
     margin-top: 40px;

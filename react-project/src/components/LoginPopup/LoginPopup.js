@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 const LoginPopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Login");
   const [userType, setUserType] = useState("customer");
-  const [username, setUsername] = useState(""); // New state for username
-  const [userEmail, setUserEmail] = useState(""); // New state for email
-  const [password, setPassword] = useState(""); // New state for password
+  const [username, setUsername] = useState(""); 
+  const [userEmail, setUserEmail] = useState(""); 
+  const [password, setPassword] = useState(""); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

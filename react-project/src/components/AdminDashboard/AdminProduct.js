@@ -1,4 +1,4 @@
-// src/components/AdminMenu.js
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -25,7 +25,7 @@ const AdminProduct = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post("/product", formState).then(() => {
-      // Refresh the product list
+      
       axios.get("/product").then((response) => {
         setProducts(response.data);
       });

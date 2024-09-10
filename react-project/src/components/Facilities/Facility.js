@@ -7,7 +7,7 @@ const Facility = () => {
   const [facilities, setFacilities] = useState([]);
 
   useEffect(() => {
-    // Fetch the facility data from the backend
+    
     axios.get('/facility')
       .then(response => {
         setFacilities(response.data);

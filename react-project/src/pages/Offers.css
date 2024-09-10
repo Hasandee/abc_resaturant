@@ -6,15 +6,15 @@ body {
 }
 
 .offers-container {
-    position: relative; /* Necessary for positioning the pseudo-element */
+    position: relative; 
     padding: 20px;
-    background-color: rgba(231, 211, 144, 0.8); /* Fallback color */
+    background-color: rgba(231, 211, 144, 0.8); 
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 8px; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-    overflow: hidden; /* Ensures the pseudo-element is contained within the border radius */
+    overflow: hidden; 
 }
 
 .offers-container::before {
@@ -24,18 +24,18 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('../utils/img/img16.jpg'); /* Adjust the path as needed */
+    background-image: url('../utils/img/img16.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    filter: blur(10px); /* Adjust the blur level as needed */
-    z-index: 0; /* Places the image behind the content */
+    filter: blur(10px); 
+    z-index: 0; 
 }
 
 .offers-container h2 {
-    position: relative; /* Ensures the text is above the pseudo-element */
+    position: relative; 
     font-size: 50px;
-    z-index: 1; /* Places the text above the blurred background */
+    z-index: 1; 
     color: #ffffff;
 }
 
@@ -44,8 +44,8 @@ body {
     padding: 0;
     width: 100%; 
     max-width: 600px; 
-    position: relative; /* Ensures the list is above the blurred background */
-    z-index: 1; /* Places the list above the blurred background */
+    position: relative; 
+    z-index: 1; 
 }
 
 .offer-item {

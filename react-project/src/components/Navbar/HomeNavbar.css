@@ -1,54 +1,53 @@
-/* src/components/Navbar/Navbar.css */
+
 
 .bg-body-tertiary {
-    background-color: #ffffff; /* Light background color */
+    background-color: #ffffff; 
   }
   
   .navbar-brand {
     font-size: 1.75rem;
-    color: #ffc400; /* Brand color */
+    color: #ffc400; 
   }
   
   .navbar-brand:hover {
-    color: #ffc400; /* Darker green on hover */
+    color: #ffc400; 
   }
   
   .nav-link {
     font-size: 1rem;
-    color: #333; /* Dark text color for links */
-    padding: 0.75rem 1rem; /* Add padding around links */
+    color: #333; 
+    padding: 0.75rem 1rem; 
   }
   
   .nav-link:hover {
-    color: #ffc400; /* Blue color on hover */
-    text-decoration: underline; /* Underline on hover */
+    color: #ffc400; 
+    text-decoration: underline; 
   }
   
   .nav-link.active {
     font-weight: bold;
-    color: #ffc400; /* Blue color for active links */
+    color: #ffc400; 
   }
   
   .navbar-toggler {
-    border-color: #ffc400; /* Blue border for the toggle button */
+    border-color: #ffc400; 
   }
   
   .navbar-toggler-icon {
-    background-image: url('data:image/svg+xml,...'); /* Bootstrap’s default icon */
+    background-image: url('data:image/svg+xml,...'); 
   }
-  
-  /* Override Bootstrap's outline-success button */
+
 .btn-outline-success {
-  color: #ffc400; /* Text color */
-  border-color: #ffc400; /* Border color */
-  padding: 0.75rem 1.5rem; /* Increase padding for a larger button */
-  font-size: 1.125rem; /* Increase font size */
+  color: #ffc400; 
+  border-color: #ffc400; 
+  padding: 0.75rem 1.5rem; 
+  font-size: 1.125rem; 
   background-color: transparent;
 }
 
 .btn-outline-success:hover {
-  background-color: #ffc400; /* Background color on hover */
-  color: #ffffff; /* White text color on hover */
+  background-color: #ffc400; 
+  color: #ffffff; 
 }
 
   

@@ -30,22 +30,22 @@ const PlaceOrder = () => {
   const handleSubmit = async () => {
     try {
       const orderDetails = {
-        userId: 'your-user-id', // Replace with actual user ID
+        userId: 'your-user-id', 
         productIds: Object.keys(cartItems),
         orderDate: new Date().toISOString(),
-        totalPrice: getTotalCartAmount() + 2, // Total amount with delivery fee
+        totalPrice: getTotalCartAmount() + 2,
         status: 'Pending',
         deliveryAddress: `${formData.street}, ${formData.city}, ${formData.state}, ${formData.zipcode}, ${formData.country}`,
-        paymentMethod: 'Credit Card', // Or other payment methods
+        paymentMethod: 'Credit Card', 
       };
 
       // Make API call to create the order
       await axios.post('/order', orderDetails);
       
-      // Show success alert
+
       alert('Order successful');
 
-      // Clear cart and navigate to another page if needed
+      
       navigate('/');
     } catch (error) {
       console.error('Error placing order:', error);

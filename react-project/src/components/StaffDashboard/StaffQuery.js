@@ -1,4 +1,4 @@
-// AdminQueryManagement.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './StaffQuery.css';
@@ -24,7 +24,7 @@ const StaffQuery = () => {
         try {
             await axios.put(`/query/${queryId}`, { adminReply: reply });
             setReply('');
-            fetchQueries(); // Refresh the list after submitting a reply
+            fetchQueries(); 
         } catch (error) {
             console.error('There was an error submitting the reply!', error);
         }
@@ -33,7 +33,7 @@ const StaffQuery = () => {
     const handleDelete = async (queryId) => {
         try {
             await axios.delete(`/query/${queryId}`);
-            fetchQueries(); // Refresh the list after deletion
+            fetchQueries(); 
         } catch (error) {
             console.error('There was an error deleting the query!', error);
         }

@@ -1,18 +1,17 @@
-/* General container styling */
+
 .admin-facility-management {
     font-family: Arial, sans-serif;
     color: #333;
     padding: 20px;
   }
   
-  /* Header styling */
   .admin-facility-management h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
     color: #2c3e50;
   }
   
-  /* Add Facility section styling */
+  
   .add-facility, .edit-facility {
     margin-bottom: 40px;
   }
@@ -45,7 +44,7 @@
     background-color: #daa800;
   }
   
-  /* Facility List section styling */
+  
   .facility-list {
     margin-top: 20px;
   }

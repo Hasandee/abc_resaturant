@@ -84,7 +84,7 @@
 .reservation-form .form-header {
     text-align: center;
     background-color: #e0f7fa;
-    padding: 0.5px; /* Decreased padding to bring the image closer to the top */
+    padding: 0.5px; 
    
 }
 
@@ -92,7 +92,7 @@
     width: 100%;
     height: auto;
     border-radius: 8px;
-    margin-top: -0.5px; /* Move the image upwards */
+    margin-top: -0.5px; 
 }
 
 .reservation-form .form-container {
