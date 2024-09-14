@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 const LoginPopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Login");
   const [userType, setUserType] = useState("customer");
-  const [username, setUsername] = useState(""); 
-  const [userEmail, setUserEmail] = useState(""); 
-  const [password, setPassword] = useState(""); 
+  const [username, setUsername] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -35,7 +35,7 @@ const LoginPopup = ({ setShowLogin }) => {
         console.error('Error during signup:', error);
       }
     } else {
-      // Login logic here
+      // Handle login
       if (userType === "customer") {
         navigate('/customerdashboard');
       } else if (userType === "admin") {
@@ -51,7 +51,7 @@ const LoginPopup = ({ setShowLogin }) => {
       <form className='login-popup-container' onSubmit={handleSubmit}>
         <div className='login-popup-title'>
           <h2>{currState}</h2>
-          <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="" />
+          <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="close" />
         </div>
         <div className="login-popup-inputs">
           {currState === "Sign up" && (
@@ -63,7 +63,35 @@ const LoginPopup = ({ setShowLogin }) => {
                 onChange={(e) => setUsername(e.target.value)} 
                 required 
               />
-              
+              <div className="user-type-selection">
+                <label>
+                  <input 
+                    type="radio" 
+                    name="userType" 
+                    value="customer" 
+                    checked={userType === "customer"} 
+                    onChange={(e) => setUserType(e.target.value)} 
+                  /> Customer
+                </label>
+                <label>
+                  <input 
+                    type="radio" 
+                    name="userType" 
+                    value="staff" 
+                    checked={userType === "staff"} 
+                    onChange={(e) => setUserType(e.target.value)} 
+                  /> Staff
+                </label>
+                <label>
+                  <input 
+                    type="radio" 
+                    name="userType" 
+                    value="admin" 
+                    checked={userType === "admin"} 
+                    onChange={(e) => setUserType(e.target.value)} 
+                  /> Admin
+                </label>
+              </div>
             </>
           )}
           <input 
@@ -95,6 +123,6 @@ const LoginPopup = ({ setShowLogin }) => {
       </form>
     </div>
   );
-}
+};
 
 export default LoginPopup;

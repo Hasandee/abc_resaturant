@@ -1,4 +1,3 @@
-
 .admin-gallery {
   background-color: #f4f4f9;
   color: #333;
@@ -11,12 +10,11 @@
   padding-top: 80px;
 }
 
-
 .admin-gallery h4 {
   font-size: 40px;
   text-align: center;
   margin-bottom: 30px;
-  color: black;
+  color: #333;
   font-weight: 600;
 }
 
@@ -27,10 +25,12 @@
   color: #666;
 }
 
+/* Form Container */
 .form-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 20px;
   margin-bottom: 30px;
 }
 
@@ -38,12 +38,21 @@
   background-color: #fff;
   padding: 25px;
   border-radius: 8px;
-  width: 48%;
+  width: 100%;
+  max-width: 48%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   margin-bottom: 20px;
 }
 
-.form-section h5, .form-section h3 {
+@media screen and (max-width: 768px) {
+  .form-section {
+    width: 100%;
+  }
+}
+
+/* Form Headings */
+.form-section h5,
+.form-section h3 {
   font-size: 22px;
   color: #333;
   margin-bottom: 20px;
@@ -56,6 +65,7 @@
   margin-bottom: 20px;
 }
 
+/* Form Input and Button Styling */
 .gallery-form .form-control {
   width: 100%;
   padding: 12px;
@@ -86,6 +96,7 @@
   background-color: #daa800;
 }
 
+/* Gallery Items Styling */
 .gallery-items {
   margin-top: 40px;
 }
@@ -103,7 +114,7 @@
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
@@ -128,6 +139,7 @@
   margin-bottom: 10px;
 }
 
+/* Item Actions */
 .item-actions {
   display: flex;
   justify-content: space-between;
@@ -150,6 +162,7 @@
   border-color: #daa800;
 }
 
+/* Modal Styling */
 .modal {
   background-color: #fff;
   padding: 30px;
@@ -172,6 +185,7 @@
   color: #333;
 }
 
+/* Modal Buttons */
 .modal .btn-success {
   background-color: #a4861e;
   color: #fff;

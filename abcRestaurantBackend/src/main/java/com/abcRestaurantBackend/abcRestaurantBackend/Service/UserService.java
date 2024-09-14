@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
 
@@ -19,70 +18,53 @@ public class UserService {
         try {
             return userRepository.findAll();
         } catch (Exception e) {
-            throw new RuntimeException("Error retrieving all users", e);
+            throw new RuntimeException("Error while fetching users: " + e.getMessage(), e);
         }
     }
 
-    public Optional<User> singleUser(String userId) {
+    public Optional<User> singleUser(String userId) {  // Change ObjectId to String
         try {
             return userRepository.findById(userId);
         } catch (Exception e) {
-            throw new RuntimeException("Error retrieving user with ID: " + userId, e);
+            throw new RuntimeException("Error while fetching user with ID " + userId + ": " + e.getMessage(), e);
         }
     }
 
-    /*public User addUser(User user) {
+    public User addUser(User user) {
         try {
-
-                user.setUserId(generateUserId());
-
+            if (user.getUserId() == null || user.getUserId().isEmpty()) {
+                user.setUserId(generateUserId());  // Ensure userId is set
+            }
             return userRepository.save(user);
         } catch (Exception e) {
-            throw new RuntimeException("Error adding new user", e);
+            throw new RuntimeException("Error while adding user: " + e.getMessage(), e);
         }
-    }*/
-
-    public User addUser(User user){
-
-
-        user.setUserId(generateUserId());
-        user.setUsername(user.getUsername());
-        user.setUserEmail(user.getUserEmail());
-        user.setPassword(user.getPassword());
-        user.setUserType(user.getUserType());
-
-        return userRepository.save(user);
     }
 
-
-
-
-
-
-    public User updateUser(String userId, User user) {
+    public User updateUser(String userId, User user) {  // Change ObjectId to String
         try {
             if (!userRepository.existsById(userId)) {
-                throw new ResourceNotFoundException("User not found with userId: " + userId);
+                throw new ResourceNotFoundException("User not found with userId " + userId);
             }
             user.setUserId(userId);  // Set the userId before saving
             return userRepository.save(user);
         } catch (ResourceNotFoundException e) {
-            throw e;  // Re-throw if it's a resource not found exception
+            throw e;  // Keep custom exceptions
         } catch (Exception e) {
-            throw new RuntimeException("Error updating user with ID: " + userId, e);
+            throw new RuntimeException("Error while updating user with ID " + userId + ": " + e.getMessage(), e);
         }
     }
 
-    public void deleteUser(String userId) {
+    public void deleteUser(String userId) {  // Change ObjectId to String
         try {
             if (!userRepository.existsById(userId)) {
-                throw new ResourceNotFoundException("User not found with userId: " + userId);
+                throw new ResourceNotFoundException("User not found with userId " + userId);
             }
             userRepository.deleteById(userId);
         } catch (ResourceNotFoundException e) {
-            throw e;
+            throw e;  // Keep custom exceptions
         } catch (Exception e) {
-            throw new RuntimeException("Error deleting user with ID: " + userId, e);
+            throw new RuntimeException("Error while deleting user with ID " + userId + ": " + e.getMessage(), e);
         }
     }
 
@@ -96,11 +78,11 @@ public class UserService {
                 if (numericPart > maxId) {
                     maxId = numericPart;
                 }
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.err.println("Error parsing userId: " + userId + ". Skipping this entry.");
+            } catch (Exception e) {
+                // Handle exception
             }
         }
         int nextId = maxId + 1;
-        return String.format("u-%03d", nextId);
+        return String.format("U-%03d", nextId);
     }
 }

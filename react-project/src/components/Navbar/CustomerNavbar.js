@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,6 +7,14 @@ import './CustomerNavbar.css';
 import { FaShoppingCart } from 'react-icons/fa';
 
 const CustomerNavbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+   
+    localStorage.removeItem('token'); 
+    navigate('/home'); 
+  };
+
   return (
     <Navbar expand="lg" className='fixed-top bg-body-primary shadow'>
       <Container>
@@ -30,6 +37,12 @@ const CustomerNavbar = () => {
             <Link to='/cart' className='nav-link text-uppercase cart-icon' aria-label="Cart">
               <FaShoppingCart style={{ fontSize: '2rem', color: 'ash' }} />
             </Link>
+            {/* Logout Button */}
+            <button 
+              onClick={handleLogout} 
+              className='btn btn-danger text-uppercase ms-3'>
+              Logout
+            </button>
           </Nav>
         </Navbar.Collapse>
       </Container>
